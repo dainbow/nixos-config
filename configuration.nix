@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let mainUser = "dainbow";
 in {
@@ -21,8 +21,7 @@ in {
   networking.hostName = "nixos"; # Define your hostname.
 
   # Enable networkmanager  
-  networking.networkmanager.enable =
-    true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
@@ -58,7 +57,40 @@ in {
     };
   };
 
-  home-manager.users.dainbow = { pkgs, ... }: {
+  home-manager.users.dainbow = { lib, pkgs, ... }: {
+    gtk = {
+      enable = true;
+
+      iconTheme = {
+        name = "Papirus-Dark";
+        package = pkgs.papirus-icon-theme;
+      };
+
+      theme = {
+        name = "palenight";
+        package = pkgs.palenight-theme;
+      };
+
+      gtk3.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
+
+      gtk4.extraConfig = {
+        Settings = ''
+          gtk-application-prefer-dark-theme=1
+        '';
+      };
+
+    };
+
+    programs.git = {
+      enable = true;
+      userName = mainUser;
+      userEmail = "suslov9876@gmail.com";
+    };
+
     programs.alacritty = {
       enable = true;
       settings = {
@@ -116,53 +148,129 @@ in {
 
     programs.btop = { enable = true; };
 
+    home.packages = with pkgs; [
+      gnomeExtensions.appindicator
+      gnomeExtensions.blur-my-shell
+      gnomeExtensions.dash-to-dock
+      gnomeExtensions.just-perfection
+      gnomeExtensions.status-area-horizontal-spacing
+      gnomeExtensions.vitals
+      gnomeExtensions.weather-oclock
+    ];
+
+    dconf.settings = with lib.hm.gvariant; {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        # `gnome-extensions list` for a list
+        enabled-extensions = [
+          "Vitals@CoreCoding.com"
+          "just-perfection-desktop@just-perfection"
+          "blur-my-shell@aunetx"
+          "appindicatorsupport@rgcjonas.gmail.com"
+          "weatheroclock@CleoMenezesJr.github.io"
+          "dash-to-dock@micxgx.gmail.com"
+        ];
+        favorite-apps = [
+          "thorium-browser.desktop"
+          "org.telegram.desktop.desktop"
+          "code.desktop"
+          "transmission-gtk.desktop"
+          "Alacritty.desktop"
+          "org.gnome.Nautilus.desktop"
+        ];
+      };
+      "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+        enable-hot-corners = false;
+        show-battery-percentage = true;
+      };
+      "org/gnome/desktop/input-sources" = {
+        sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ru" ]) ];
+      };
+      "org/gnome/desktop/wm/preferences" = { workspace-names = [ "Main" ]; };
+      "org/gnome/desktop/wm/keybindings" = {
+        switch-applications = [ ];
+        switch-applications-backward = [ ];
+        switch-windows = [ "<Alt>Tab" ];
+        switch-windows-backward = [ "<Shift><Alt>Tab" ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        ];
+      };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
+        {
+          binding = "<Super>t";
+          command = "alacritty";
+          name = "Term";
+        };
+
+      "org/gnome/shell/extensions/vitals" = {
+        hot-sensors = [
+          "_memory_usage_"
+          "__network-rx_max__"
+          "_battery_rate_"
+          "_processor_usage_"
+        ];
+        show-storage = true;
+        show-voltage = true;
+        show-memory = true;
+        show-fan = false;
+        show-temperature = false;
+        show-processor = true;
+        show-network = true;
+        show-battery = true;
+      };
+      "org/gnome/shell/weather" = { automatic-location = true; };
+      "org/gnome/GWeather4" = { temperature-unit = "centigrade"; };
+    };
+
     home.stateVersion = "24.11";
   };
 
   environment.systemPackages = with pkgs; [
-    vim
-    wget
-
     # Development stuff
     git
+    typst
+    vscode
+    nil
+    nixfmt-classic
+    clang-tools
+    helix
 
     # Terminal stuff
     alacritty
     zsh
+    starship
 
-    firefox
+    # Multimedia
     telegram-desktop
+    v2raya
 
-    # Gnome stuff
+    # Gnome themes and default apps
     papirus-folders
     papirus-icon-theme
-
-    gnome.gnome-tweaks
+    palenight-theme
+    loupe
     gnome.gnome-weather
-    gnomeExtensions.appindicator
-    gnomeExtensions.blur-my-shell
-    gnomeExtensions.dash-to-dock
-    gnomeExtensions.just-perfection
-    gnomeExtensions.status-area-horizontal-spacing
-    gnomeExtensions.vitals
-    gnomeExtensions.weather-oclock
+    gnome.nautilus
 
-    starship
-    eza
+    # Better CLI tools
+    fd
+    ripgrep
     dust
-    fastfetch
-    helix
-    nixfmt-classic
+    eza
 
-    # Tops!
+    # Better nerd tools
     btop
+    fastfetch
 
-    vscode
+    # Media stuff
     transmission-gtk
     vlc
-    krusader
-    loupe
 
+    # AppImage git apps
     (let
       name = "thorium";
       version = "124.0.6367.218";
@@ -190,8 +298,23 @@ in {
           "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
         hash = "sha256-EY89VbK/alSeluf5PWbsufaPrN701Jy8LOuFbGnxEjs=";
       };
-    in appimageTools.wrapType2 { inherit name version src; })
+    in appimageTools.wrapType2 {
+      inherit name version src;
+      extraPkgs = pkgs: [
+        pkgs.libepoxy
+        pkgs.libayatana-indicator
+        pkgs.libdbusmenu
+      ];
+    })
   ];
+
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
+    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-libav
+    ]);
 
   environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 
@@ -201,9 +324,18 @@ in {
     options = "--delete-older-than 30d";
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [
+    (self: super: {
+      gnome = super.gnome.overrideScope (gself: gsuper: {
+        nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
+          buildInputs = nsuper.buildInputs
+            ++ (with pkgs.gst_all_1; [ gst-plugins-good gst-plugins-bad ]);
+        });
+      });
+    })
+  ];
 
   services.btrfs.autoScrub.enable = true;
   services.btrfs.autoScrub.interval = "weekly";
