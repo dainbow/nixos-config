@@ -183,6 +183,7 @@ in {
         color-scheme = "prefer-dark";
         enable-hot-corners = false;
         show-battery-percentage = true;
+        clock-show-seconds = true;
       };
       "org/gnome/desktop/input-sources" = {
         sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ru" ]) ];
