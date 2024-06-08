@@ -154,6 +154,12 @@ in {
       };
     };
 
+    programs.direnv = {
+      enable = true;
+      enableZshIntegration = true;
+      nix-direnv.enable = true;
+    };
+
     # Helix editor default choose
     programs.helix = {
       enable = true;
@@ -215,6 +221,9 @@ in {
         switch-windows = [ "<Alt>Tab" ];
         switch-windows-backward = [ "<Shift><Alt>Tab" ];
       };
+      "org/gnome/desktop/wm/preferences" = {
+        button-layout = ":minimize,maximize,close";
+      };
       # Custom shortcut for terminal
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = [
@@ -257,7 +266,6 @@ in {
   environment.systemPackages = with pkgs; [
     # Development stuff
     git
-    typst
     vscode
     nil
     nixfmt-classic
