@@ -23,6 +23,11 @@ in {
   # Enable networkmanager  
   networking.networkmanager.enable = true;
 
+  # Hack to enable VPN work
+  networking.nameservers = [ "1.1.1.1" ];
+  networking.firewall.enable = false;
+  networking.resolvconf.dnsExtensionMechanism = false;
+
   # Set your time zone.
   time.timeZone = "Europe/Moscow";
 
@@ -33,16 +38,16 @@ in {
   users.defaultUserShell = pkgs.zsh;
   users.mutableUsers = false;
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. 
   users.users.dainbow = {
     isNormalUser = true;
     home = "/home/${mainUser}";
     hashedPassword =
       "$6$9IC0fdnfmsnoOEbg$.jGDMrzeKvaembPfo.31XSjbQkyvHtVg8zPM494SBJMhF8iPkxpXG1nfXDe9E6fY3/KkoLezFVUnoHmB.7Dj80";
-    extraGroups =
-      [ "wheel" "input" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "input" "networkmanager" ];
   };
 
+  # Enable Gnome with gdm autologin
   services = {
     xserver = {
       enable = true;
@@ -57,7 +62,9 @@ in {
     };
   };
 
+  # Certain user config
   home-manager.users.dainbow = { lib, pkgs, ... }: {
+    # GTK Theme choose + dark mode
     gtk = {
       enable = true;
 
@@ -85,12 +92,14 @@ in {
 
     };
 
+    # My git info 
     programs.git = {
       enable = true;
       userName = mainUser;
       userEmail = "suslov9876@gmail.com";
     };
 
+    # Alacritty theme
     programs.alacritty = {
       enable = true;
       settings = {
@@ -108,6 +117,7 @@ in {
       };
     };
 
+    # Zsh config with aliases
     programs.zsh = {
       enable = true;
       enableCompletion = true;
@@ -117,6 +127,8 @@ in {
       shellAliases = {
         l = "exa -la";
         c = "clear";
+        update =
+          "sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
       };
 
       oh-my-zsh = {
@@ -125,6 +137,7 @@ in {
       };
     };
 
+    # Starship (zsh wrapper) config
     programs.starship = {
       enable = true;
       settings = {
@@ -141,13 +154,16 @@ in {
       };
     };
 
+    # Helix editor default choose
     programs.helix = {
       enable = true;
       defaultEditor = true;
     };
 
+    # Better top enable
     programs.btop = { enable = true; };
 
+    # Install gnome extensions for my users
     home.packages = with pkgs; [
       gnomeExtensions.appindicator
       gnomeExtensions.blur-my-shell
@@ -158,10 +174,11 @@ in {
       gnomeExtensions.weather-oclock
     ];
 
+    # Dconf settings
     dconf.settings = with lib.hm.gvariant; {
       "org/gnome/shell" = {
         disable-user-extensions = false;
-        # `gnome-extensions list` for a list
+        # Enable extensions I use
         enabled-extensions = [
           "Vitals@CoreCoding.com"
           "just-perfection-desktop@just-perfection"
@@ -170,6 +187,7 @@ in {
           "weatheroclock@CleoMenezesJr.github.io"
           "dash-to-dock@micxgx.gmail.com"
         ];
+        # Pined dock apps
         favorite-apps = [
           "thorium-browser.desktop"
           "org.telegram.desktop.desktop"
@@ -179,22 +197,25 @@ in {
           "org.gnome.Nautilus.desktop"
         ];
       };
+      # Common settings (dark mode, battery, seconds)
       "org/gnome/desktop/interface" = {
         color-scheme = "prefer-dark";
         enable-hot-corners = false;
         show-battery-percentage = true;
         clock-show-seconds = true;
       };
+      # Keyboard layouts
       "org/gnome/desktop/input-sources" = {
         sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "ru" ]) ];
       };
-      "org/gnome/desktop/wm/preferences" = { workspace-names = [ "Main" ]; };
+      # Override default alt-tab behaviour
       "org/gnome/desktop/wm/keybindings" = {
         switch-applications = [ ];
         switch-applications-backward = [ ];
         switch-windows = [ "<Alt>Tab" ];
         switch-windows-backward = [ "<Shift><Alt>Tab" ];
       };
+      # Custom shortcut for terminal
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = [
           "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
@@ -206,7 +227,7 @@ in {
           command = "alacritty";
           name = "Term";
         };
-
+      # Vitals (system info) extension config
       "org/gnome/shell/extensions/vitals" = {
         hot-sensors = [
           "_memory_usage_"
@@ -223,13 +244,16 @@ in {
         show-network = true;
         show-battery = true;
       };
+      # Weather config
       "org/gnome/shell/weather" = { automatic-location = true; };
       "org/gnome/GWeather4" = { temperature-unit = "centigrade"; };
     };
 
+    # DO NOT TOUCH
     home.stateVersion = "24.11";
   };
 
+  # My packages
   environment.systemPackages = with pkgs; [
     # Development stuff
     git
@@ -247,7 +271,6 @@ in {
 
     # Multimedia
     telegram-desktop
-    v2raya
 
     # Gnome themes and default apps
     papirus-folders
@@ -271,7 +294,7 @@ in {
     transmission-gtk
     vlc
 
-    # AppImage git apps
+    # Thorium browser
     (let
       name = "thorium";
       version = "124.0.6367.218";
@@ -291,42 +314,47 @@ in {
       '';
     })
 
+    # Hiddify (VPN) build
     (let
-      name = "hiddify";
-      version = "1.4.0";
-      src = fetchurl {
-        url =
-          "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
-        hash = "sha256-EY89VbK/alSeluf5PWbsufaPrN701Jy8LOuFbGnxEjs=";
+      name = "hiddify-cli";
+      version = "1.3.6";
+
+      src = fetchFromGitHub {
+        owner = "hiddify";
+        repo = "hiddify-core";
+        rev = "v${version}";
+        hash = "sha256-xmFZYW3mw97bB2CzdGhtizOU4snJ1Jq9b57xvoOQdgA=";
       };
-    in appimageTools.wrapType2 {
-      inherit name version src;
-      extraPkgs = pkgs: [
-        pkgs.libepoxy
-        pkgs.libayatana-indicator
-        pkgs.libdbusmenu
+
+      vendorHash = "sha256-znbXFDz3Zem2u64iXBUiaTCpyTHnqgsAHwuxOj0VH70=";
+    in buildGoModule {
+      inherit name version src vendorHash;
+
+      ldflags = [ "-s" "-w" ];
+      subPackages = [ "cmd" "cli" ];
+      tags = [
+        "with_gvisor"
+        "with_quic"
+        "with_wireguard"
+        "with_ech"
+        "with_utls"
+        "with_clash_api"
+        "with_grpc"
       ];
     })
   ];
 
-  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
-    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-      gst-libav
-    ]);
-
-  environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
-
+  # Automatic collect garbage
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
 
+  # Allow unfree packages (NVIDIA)
   nixpkgs.config.allowUnfree = true;
 
+  # Gnome Files hack to see video metadata
   nixpkgs.overlays = [
     (self: super: {
       gnome = super.gnome.overrideScope (gself: gsuper: {
@@ -338,17 +366,30 @@ in {
     })
   ];
 
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
+    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-libav
+    ]);
+
+  # Btrfs stuff
   services.btrfs.autoScrub.enable = true;
   services.btrfs.autoScrub.interval = "weekly";
 
+  # Minimal gnome apps
   services.gnome.core-utilities.enable = false;
   services.gnome.games.enable = false;
   services.gnome.core-developer-tools.enable = false;
   services.xserver.excludePackages = [ pkgs.xterm ];
+  environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 
+  # Autologin fixup
   systemd.services."getty@tty1".enable = false;
   systemd.services."autovt@tty1".enable = false;
 
+  # System fonts
   fonts.packages = with pkgs; [
     jetbrains-mono
     noto-fonts
@@ -360,6 +401,7 @@ in {
     (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" "FiraCode" ]; })
   ];
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  # Do not touch
+  system.stateVersion = "24.11";
 }
 
