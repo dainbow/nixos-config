@@ -285,10 +285,12 @@ in {
     ripgrep
     dust
     eza
+    bat
 
     # Better nerd tools
     btop
     fastfetch
+    nvtopPackages.full
 
     # Media stuff
     transmission-gtk
@@ -334,6 +336,11 @@ in {
     dates = "weekly";
     options = "--delete-older-than 30d";
   };
+
+  nix.settings.auto-optimise-store = true;
+
+  # Enable nix search/store
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Allow unfree packages (NVIDIA)
   nixpkgs.config.allowUnfree = true;
