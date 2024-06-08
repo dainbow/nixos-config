@@ -314,33 +314,17 @@ in {
       '';
     })
 
-    # Hiddify (VPN) build
     (let
-      name = "hiddify-cli";
-      version = "1.3.6";
-
-      src = fetchFromGitHub {
-        owner = "hiddify";
-        repo = "hiddify-core";
-        rev = "v${version}";
-        hash = "sha256-xmFZYW3mw97bB2CzdGhtizOU4snJ1Jq9b57xvoOQdgA=";
+      name = "hiddify";
+      version = "1.4.0";
+      src = fetchurl {
+        url =
+          "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
+        hash = "sha256-EY89VbK/alSeluf5PWbsufaPrN701Jy8LOuFbGnxEjs=";
       };
-
-      vendorHash = "sha256-znbXFDz3Zem2u64iXBUiaTCpyTHnqgsAHwuxOj0VH70=";
-    in buildGoModule {
-      inherit name version src vendorHash;
-
-      ldflags = [ "-s" "-w" ];
-      subPackages = [ "cmd" "cli" ];
-      tags = [
-        "with_gvisor"
-        "with_quic"
-        "with_wireguard"
-        "with_ech"
-        "with_utls"
-        "with_clash_api"
-        "with_grpc"
-      ];
+    in appimageTools.wrapType2 {
+      inherit name version src;
+      extraPkgs = pkgs: [ pkgs.libepoxy ];
     })
   ];
 
