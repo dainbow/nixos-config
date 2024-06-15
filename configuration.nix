@@ -13,6 +13,7 @@ in {
     <home-manager/nixos>
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_stable;
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -270,7 +271,14 @@ in {
     nil
     nixfmt-classic
     clang-tools
+    typst-lsp
     helix
+    rust-analyzer
+    yaml-language-server
+    taplo
+    marksman
+    cmake-language-server
+    bash-language-server
 
     # Terminal stuff
     alacritty
@@ -390,6 +398,7 @@ in {
 
   # System fonts
   fonts.packages = with pkgs; [
+    fira-code
     jetbrains-mono
     noto-fonts
     noto-fonts-emoji
