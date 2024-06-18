@@ -295,6 +295,9 @@ in {
     loupe
     gnome.gnome-weather
     gnome.nautilus
+    unrar-wrapper
+    zip
+    ripunzip
 
     # Better CLI tools
     fd
