@@ -4,17 +4,19 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     disko.url = "github:nix-community/disko";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-hardware, disko, ... }@inputs:
-    let 
+  outputs =
+    { self, nixpkgs, home-manager, nixos-hardware, disko, nur, ... }@inputs:
+    let
       mainUser = "dainbow";
       hostname = "nixos";
     in {
@@ -23,17 +25,17 @@
 
         modules = [
           nixos-hardware.nixosModules.asus-zephyrus-ga401
+          nur.nixosModules.nur
           disko.nixosModules.disko
           ./nixos/module.nix
         ];
       };
 
-      homeConfigurations."${mainUser}" = home-manager.lib.homeManagerConfiguration {
-        extraSpecialArgs = { inherit mainUser; };
-        
-        modules = [  
-          ./home-manager/home.nix
-        ];
-      }; 
+      homeConfigurations."${mainUser}" =
+        home-manager.lib.homeManagerConfiguration {
+          extraSpecialArgs = { inherit mainUser; };
+
+          modules = [ ./home-manager/home.nix ];
+        };
     };
 }
