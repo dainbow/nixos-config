@@ -9,8 +9,6 @@
       shellAliases = {
         l = "exa -la";
         c = "clear";
-        update =
-          "sudo nix-channel --update && sudo nixos-rebuild switch --upgrade";
       };
 
       oh-my-zsh = {
