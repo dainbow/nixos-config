@@ -31,6 +31,8 @@
     };
   };
 
+  time.timeZone = "Europe/Moscow";
+
   nixpkgs.config.allowUnfree = true;
 
   # Do not touch

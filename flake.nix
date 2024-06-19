@@ -10,9 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    disko = {
-      url = "github:nix-community/disko";
-    };
+    disko.url = "github:nix-community/disko";
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, disko, ... }@inputs:
