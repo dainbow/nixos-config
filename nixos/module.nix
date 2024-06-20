@@ -15,6 +15,7 @@
     ./network.nix
     ./terminal.nix
     ./user.nix
+    ./fingerprint.nix
   ];
 
   nix = {
