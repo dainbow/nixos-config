@@ -4,6 +4,7 @@
     loupe
     transmission-gtk
     vlc
+    tor-browser
 
     # Thorium browser
     (let

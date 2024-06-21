@@ -1,1 +1,1 @@
-{ pkgs, ... }: { boot.kernelPackages = pkgs.linuxPackages_xanmod_stable; }
+{ pkgs, ... }: { boot.kernelPackages = pkgs.linuxPackages_latest; }
