@@ -8,6 +8,7 @@
     dust
     eza
     bat
+    glow
 
     btop
     fastfetch
