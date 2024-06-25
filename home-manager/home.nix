@@ -1,4 +1,4 @@
-{ mainUser, ... }: {
+{ ... }: {
   imports = [
     ./alacritty.nix
     ./btop.nix
@@ -10,11 +10,8 @@
     ./helix.nix
     ./starship.nix
     ./zsh.nix
+    ./bat.nix
   ];
 
-  home = {
-    username = "${mainUser}";
-    homeDirectory = "/home/${mainUser}";
-    stateVersion = "24.11";
-  };
+  home.stateVersion = "24.11";
 }

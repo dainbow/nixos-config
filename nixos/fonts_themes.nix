@@ -1,10 +1,4 @@
 { pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
-    papirus-folders
-    papirus-icon-theme
-    palenight-theme
-  ];
-
   # System fonts
   fonts.packages = with pkgs; [
     fira-code

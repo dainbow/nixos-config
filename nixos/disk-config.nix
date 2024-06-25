@@ -10,7 +10,8 @@
             ESP = {
               priority = 1;
               name = "ESP";
-              size = "500M";
+              start = "1M";
+              end = "256M";
               type = "EF00";
               content = {
                 type = "filesystem";
@@ -28,9 +29,10 @@
             root = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
+                type = "btrfs";
+                extraArgs = [ "-f" ]; # Override existing partition
                 mountpoint = "/";
+                mountOptions = [ "compress=zstd" "noatime" ];
               };
             };
           };

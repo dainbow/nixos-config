@@ -1,19 +1,20 @@
-{...}: {
+{ ... }: {
   # Starship (zsh wrapper) config
-    programs.starship = {
-      enable = true;
-      settings = {
-        add_newline = false;
+  programs.starship = {
+    enable = true;
 
-        sudo = { disabled = false; };
+    settings = {
+      add_newline = false;
 
-        memory_usage = {
-          disabled = false;
-          threshold = 50;
-        };
+      sudo = { disabled = false; };
 
-        os = { disabled = false; };
+      memory_usage = {
+        disabled = false;
+        threshold = 50;
       };
+
+      os = { disabled = false; };
     };
+  };
 
 }

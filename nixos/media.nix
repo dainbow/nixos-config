@@ -2,7 +2,7 @@
   environment.systemPackages = with pkgs; [
     telegram-desktop
     loupe
-    transmission-gtk
+    transmission_4-gtk
     vlc
     tor-browser
 

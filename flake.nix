@@ -12,10 +12,11 @@
 
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
+    stylix.url = "github:danth/stylix";
   };
 
-  outputs =
-    { self, nixpkgs, home-manager, nixos-hardware, disko, nur, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixos-hardware, disko, nur, stylix
+    , ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "nixos";
@@ -24,18 +25,19 @@
         specialArgs = { inherit inputs mainUser hostname; };
 
         modules = [
+          stylix.nixosModules.stylix
+          home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.nixosModules.nur
           disko.nixosModules.disko
           ./nixos/module.nix
+
+          {
+            home-manager.users."${mainUser}" = {
+              imports = [ ./home-manager/home.nix ];
+            };
+          }
         ];
       };
-
-      homeConfigurations."${mainUser}" =
-        home-manager.lib.homeManagerConfiguration {
-          extraSpecialArgs = { inherit mainUser; };
-
-          modules = [ ./home-manager/home.nix ];
-        };
     };
 }

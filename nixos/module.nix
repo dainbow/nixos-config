@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./bootloader.nix
+    ./btrfs.nix
     ./cli.nix
     ./developing.nix
     ./disk-config.nix
@@ -16,6 +17,7 @@
     ./user.nix
     ./fingerprint.nix
     ./nvidia.nix
+    ./stylix.nix
   ];
 
   nix = {
