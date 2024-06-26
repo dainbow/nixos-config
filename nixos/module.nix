@@ -18,6 +18,7 @@
     ./fingerprint.nix
     ./nvidia.nix
     ./stylix.nix
+    ./steam.nix
   ];
 
   nix = {

@@ -25,6 +25,16 @@
           buildInputs = nsuper.buildInputs
             ++ (with pkgs.gst_all_1; [ gst-plugins-good gst-plugins-bad ]);
         });
+
+        mutter = gsuper.mutter.overrideAttrs (old: {
+          src = pkgs.fetchFromGitLab  {
+            domain = "gitlab.gnome.org";
+            owner = "vanvugt";
+            repo = "mutter";
+            rev = "triple-buffering-v4-46";
+            hash = "sha256-fkPjB/5DPBX06t7yj0Rb3UEuu5b9mu3aS+jhH18+lpI=";
+          };
+        });
       });
     })
   ];
