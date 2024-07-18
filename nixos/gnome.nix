@@ -15,24 +15,25 @@
     };
   };
 
-  environment.systemPackages = with pkgs.gnome; [ gnome-weather nautilus ];
+  environment.systemPackages = (with pkgs.gnome; [ gnome-weather ])
+    ++ [ pkgs.nautilus ];
 
   # Gnome Files hack to see video metadata
   nixpkgs.overlays = [
     (self: super: {
-      gnome = super.gnome.overrideScope (gself: gsuper: {
-        nautilus = gsuper.nautilus.overrideAttrs (nsuper: {
-          buildInputs = nsuper.buildInputs
-            ++ (with pkgs.gst_all_1; [ gst-plugins-good gst-plugins-bad ]);
-        });
+      nautilus = super.nautilus.overrideAttrs (nsuper: {
+        buildInputs = nsuper.buildInputs
+          ++ (with pkgs.gst_all_1; [ gst-plugins-good gst-plugins-bad ]);
+      });
 
+      gnome = super.gnome.overrideScope (gself: gsuper: {
         mutter = gsuper.mutter.overrideAttrs (old: {
-          src = pkgs.fetchFromGitLab  {
+          src = pkgs.fetchFromGitLab {
             domain = "gitlab.gnome.org";
             owner = "vanvugt";
             repo = "mutter";
             rev = "triple-buffering-v4-46";
-            hash = "sha256-fkPjB/5DPBX06t7yj0Rb3UEuu5b9mu3aS+jhH18+lpI=";
+            hash = "sha256-nz1Enw1NjxLEF3JUG0qknJgf4328W/VvdMjJmoOEMYs=";
           };
         });
       });

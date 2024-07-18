@@ -1,6 +1,4 @@
 { ... }: {
   # Alacritty theme
-  programs.alacritty = {
-    enable = true;
-  };
+  programs.alacritty = { enable = true; };
 }

@@ -28,11 +28,11 @@
 
     (let
       name = "hiddify";
-      version = "1.4.0";
+      version = "1.5.2";
       src = fetchurl {
         url =
           "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
-        hash = "sha256-EY89VbK/alSeluf5PWbsufaPrN701Jy8LOuFbGnxEjs=";
+        hash = "sha256-QfdWxM8pOZxipg9htwi/QWzexYYFjhI8419NrAmyrEY=";
       };
     in appimageTools.wrapType2 {
       inherit name version src;

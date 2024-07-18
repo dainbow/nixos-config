@@ -15,16 +15,17 @@
     ./network.nix
     ./terminal.nix
     ./user.nix
-    ./fingerprint.nix
+    # ./fingerprint.nix
     ./nvidia.nix
     ./stylix.nix
-    ./steam.nix
+    # ./steam.nix
   ];
 
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-
+      system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test"  "gccarch-znver3" ];
+      
       auto-optimise-store = true;
     };
 
@@ -34,6 +35,15 @@
       options = "--delete-older-than 30d";
     };
   };
+
+  # nixpkgs.hostPlatform = {
+  #   gcc = {
+  #     arch = "znver3";
+  #     tune = "znver3";
+  #   };
+
+  #   system = "x86_64-linux";
+  # };
 
   time.timeZone = "Europe/Moscow";
 

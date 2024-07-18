@@ -1,7 +1,6 @@
 { ... }: {
   imports = [
     ./alacritty.nix
-    ./btop.nix
     ./dconf.nix
     ./direnv.nix
     ./git.nix
@@ -10,7 +9,8 @@
     ./helix.nix
     ./starship.nix
     ./zsh.nix
-    ./bat.nix
+    ./cli.nix
+    ./qt.nix
   ];
 
   home.stateVersion = "24.11";

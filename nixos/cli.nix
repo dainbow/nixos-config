@@ -3,14 +3,8 @@
     zip
     ripunzip
 
-    fd
-    ripgrep
     dust
-    eza
-    bat
-    glow
 
-    btop
     fastfetch
     nvtopPackages.full
   ];
