@@ -1,4 +1,4 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
     ./bootloader.nix
     ./btrfs.nix
@@ -34,6 +34,8 @@
       dates = "weekly";
       options = "--delete-older-than 30d";
     };
+
+    package = pkgs.lix;
   };
 
   # nixpkgs.hostPlatform = {
