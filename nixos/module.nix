@@ -1,7 +1,6 @@
 { pkgs, ... }: {
   imports = [
     ./bootloader.nix
-    ./btrfs.nix
     ./cli.nix
     ./developing.nix
     ./disk-config.nix

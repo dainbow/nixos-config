@@ -24,7 +24,7 @@
     ,  ... }@inputs:
     let
       mainUser = "dainbow";
-      hostname = "nixos";
+      hostname = "dainix";
     in {
       nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs mainUser hostname; };
