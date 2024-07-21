@@ -1,4 +1,3 @@
 { ... }: {
-  # Alacritty theme
-  programs.alacritty = { enable = true; };
+  programs.foot = { enable = true; };
 }

@@ -18,7 +18,7 @@
         "org.telegram.desktop.desktop"
         "code.desktop"
         "transmission-gtk.desktop"
-        "Alacritty.desktop"
+        "org.codeberg.dnkl.foot.desktop"
         "org.gnome.Nautilus.desktop"
       ];
     };
@@ -52,7 +52,7 @@
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
       {
         binding = "<Super>t";
-        command = "alacritty";
+        command = "foot";
         name = "Term";
       };
     # Vitals (system info) extension config
