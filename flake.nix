@@ -21,7 +21,7 @@
   };
 
   outputs = { self, nixpkgs, home-manager, nixos-hardware, disko, nur, stylix
-    ,  ... }@inputs:
+    , ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -31,7 +31,7 @@
 
         modules = [
           stylix.nixosModules.stylix
-          home-manager.nixosModules.home-manager 
+          home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.nixosModules.nur
           disko.nixosModules.disko
@@ -39,10 +39,8 @@
           ./nixos/module.nix
 
           {
-            home-manager = {             
-              users."${mainUser}" = {             
-                imports = [ ./home-manager/home.nix ];
-              };
+            home-manager = {
+              users."${mainUser}" = { imports = [ ./home-manager/home.nix ]; };
             };
           }
         ];

@@ -2,11 +2,31 @@
   services.hyprpaper.enable = true;
   programs.rofi.enable = true;
 
+  home.packages = with pkgs; [
+    grim
+    slurp
+    satty
+    wl-clipboard
+    killall
+    cliphist
+    networkmanager_dmenu
+    xorg.xhost
+  ];
+
+  xdg.configFile."networkmanager-dmenu/config.ini".text = ''
+    [dmenu]
+    dmenu_command = rofi -dmenu
+  '';
+
   wayland.windowManager.hyprland = {
     enable = true;
 
     settings = {
-      general = { layout = "master"; };
+      general = {
+        layout = "master";
+        gaps_out = 5;
+        border_size = 2;
+      };
 
       input = {
         kb_layout = "us,ru";
@@ -21,10 +41,18 @@
 
       cursor = { no_warps = true; };
 
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+      };
+
+      decoration = { rounding = 10; };
+
       exec-once = [
         "${pkgs.polkit-kde-agent}/libexec/.polkit-kde-authentication-agent-1-wrapped"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
+        "xhost +local:"
       ];
 
       "$mod" = "SUPER";
@@ -36,7 +64,8 @@
         "$mod, T, exec, foot"
         "$mod, Y, exec, foot yazi"
 
-        ''$mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
+        ''
+          $mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
 
         "$mod, D, exec, rofi -show drun"
 
@@ -44,6 +73,7 @@
         "$mod SHIFT, B, exec, killall -SIGUSR1 .waybar-wrapped"
 
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
+        "$mod, N, exec, networkmanager_dmenu"
 
         "$mod, left, movefocus, l"
         "$mod, right, movefocus, r"
@@ -81,21 +111,21 @@
         "$mod CTRL, right, resizeactive, 60 0"
         "$mod CTRL, up, resizeactive, 0 -60"
         "$mod CTRL, down, resizeactive, 0 60"
-      
+
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"        
+        ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
       ];
 
-      windowrule = [ 
-        "float, ^(Rofi)$" 
+      windowrule = [
+        "float, ^(Rofi)$"
         "stayfocused, ^(Rofi)$"
-        
-        "float, title:^(Media viewer)$" 
-      
+
+        "float, title:^(Media viewer)$"
+
         "float, title:^(satty)$"
         "stayfocused, title:^(satty)$"
-        "opaque, title:^(satty)$"    
+        "opaque, title:^(satty)$"
       ];
     };
   };

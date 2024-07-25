@@ -3,15 +3,6 @@
 
   environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
 
-  environment.systemPackages = with pkgs; [
-    grim
-    slurp
-    satty
-    wl-clipboard
-    killall
-    cliphist
-  ];
-
   services.greetd = {
     enable = true;
 
