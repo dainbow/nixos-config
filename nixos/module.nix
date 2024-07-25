@@ -5,8 +5,8 @@
     ./developing.nix
     ./disk-config.nix
     ./fonts_themes.nix
-    ./gdm.nix
-    ./gnome.nix
+    # ./gdm.nix
+    # ./gnome.nix
     ./hardware-configuration.nix
     ./kernel.nix
     ./media.nix
@@ -18,13 +18,16 @@
     ./nvidia.nix
     ./stylix.nix
     # ./steam.nix
+    ./hyprland.nix
+    ./bluetooth.nix
   ];
 
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
-      system-features = [ "benchmark" "big-parallel" "kvm" "nixos-test"  "gccarch-znver3" ];
-      
+      system-features =
+        [ "benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver3" ];
+
       auto-optimise-store = true;
     };
 

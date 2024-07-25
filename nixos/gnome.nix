@@ -15,17 +15,11 @@
     };
   };
 
-  environment.systemPackages = (with pkgs.gnome; [ gnome-weather ])
-    ++ [ pkgs.nautilus ];
+  environment.systemPackages = (with pkgs.gnome; [ gnome-weather ]);
 
   # Gnome Files hack to see video metadata
   nixpkgs.overlays = [
     (self: super: {
-      nautilus = super.nautilus.overrideAttrs (nsuper: {
-        buildInputs = nsuper.buildInputs
-          ++ (with pkgs.gst_all_1; [ gst-plugins-good gst-plugins-bad ]);
-      });
-
       gnome = super.gnome.overrideScope (gself: gsuper: {
         mutter = gsuper.mutter.overrideAttrs (old: {
           src = pkgs.fetchFromGitLab {
@@ -39,14 +33,6 @@
       });
     })
   ];
-
-  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 =
-    lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
-      gst-plugins-good
-      gst-plugins-bad
-      gst-plugins-ugly
-      gst-libav
-    ]);
 
   environment.gnome.excludePackages = (with pkgs; [ gnome-tour ]);
 }

@@ -19,7 +19,6 @@
         "code.desktop"
         "transmission-gtk.desktop"
         "org.codeberg.dnkl.foot.desktop"
-        "org.gnome.Nautilus.desktop"
       ];
     };
     # Common settings (dark mode, battery, seconds)
@@ -47,6 +46,7 @@
     "org/gnome/settings-daemon/plugins/media-keys" = {
       custom-keybindings = [
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+        "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
       ];
     };
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" =
@@ -54,6 +54,12 @@
         binding = "<Super>t";
         command = "foot";
         name = "Term";
+      };
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" =
+      {
+        binding = "<Super>y";
+        command = "foot yazi";
+        name = "Explorer";
       };
     # Vitals (system info) extension config
     "org/gnome/shell/extensions/vitals" = {
