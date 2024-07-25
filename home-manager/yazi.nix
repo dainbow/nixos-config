@@ -6,18 +6,17 @@
       open = {
         rules = [
           {
-            use = "imager";
+            use = [ "imager" "copy" ];
             mime = "image/*";
           }
           {
-            use = "play";
+            use = [ "play" "copy" ];
             mime = "video/*";
           }
           {
-            use = "play";
+            use = [ "play" "copy" ];
             mime = "audio/*";
           }
-
         ];
       };
 
@@ -29,6 +28,11 @@
 
         imager = [{
           exec = ''${pkgs.loupe}/bin/loupe "$@"'';
+          orhan = true;
+        }];
+
+        copy = [{
+          exec = ''wl-copy < "$@"'';
           orhan = true;
         }];
       };

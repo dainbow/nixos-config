@@ -14,6 +14,7 @@
     ./qt.nix
     # ./firefox.nix
     ./hyprland.nix
+    ./hyprlock.nix
     ./waybar.nix
   ];
 
