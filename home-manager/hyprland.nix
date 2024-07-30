@@ -1,6 +1,10 @@
 { pkgs, ... }: {
   services.hyprpaper.enable = true;
-  programs.rofi.enable = true;
+
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+  };
 
   home.packages = with pkgs; [
     grim
@@ -64,8 +68,7 @@
         "$mod, T, exec, foot"
         "$mod, Y, exec, foot yazi"
 
-        ''
-          $mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
+        ''$mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
 
         "$mod, D, exec, rofi -show drun"
 
@@ -117,14 +120,18 @@
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        
+        ", XF86KbdBrightnessDown, exec, asusctl -p"
+        ", XF86KbdBrightnessUp, exec, asusctl -n"
       ];
 
       windowrule = [
         "float, ^(Rofi)$"
         "stayfocused, ^(Rofi)$"
 
+        "fullscreen, title:^(Media viewer)$"
         "float, title:^(Media viewer)$"
-
+        
         "float, title:^(satty)$"
         "stayfocused, title:^(satty)$"
         "opaque, title:^(satty)$"

@@ -23,6 +23,7 @@
       ];
       modules-right = [
         "hyprland/language"
+        "custom/asusctl"
         "network"
         "bluetooth"
         "pulseaudio"
@@ -139,6 +140,40 @@
         format-connected = "󰂱 {device_alias}";
         format-connected-battery =
           "󰂱 {device_alias} : 󰥉 {device_battery_percentage}%";
+
+        tooltip = false;
+        interval = refreshInterval;
+      };
+
+      "custom/asusctl" = {
+        format = "{}";
+        return-type = "json";
+
+        exec = ''
+          ${pkgs.bash}/bin/bash ${
+            pkgs.writers.writeBash "asusctlScript" ''
+              state=$(asusctl profile -p)
+
+              case $state in
+                *Quiet*)
+                  echo "{\"text\":\"🍃\"}"
+                  ;;
+                *Balanced*)
+                  echo "{\"text\":\"🖕\"}"
+                  ;;
+                *Performance*)
+                  echo "{\"text\":\"🔥\"}"
+                  ;;
+                *)
+                  echo 'zalupa'
+                ;;
+              esac
+
+              exit 0
+            ''
+          }
+        '';
+        on-click = "asusctl profile -n";
 
         tooltip = false;
         interval = refreshInterval;
