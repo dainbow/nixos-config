@@ -22,17 +22,17 @@
 
       opener = {
         play = [{
-          exec = ''${pkgs.vlc}/bin/vlc "$@"'';
+          run = ''${pkgs.vlc}/bin/vlc "$@"'';
           orphan = true;
         }];
 
         imager = [{
-          exec = ''${pkgs.loupe}/bin/loupe "$@"'';
+          run = ''${pkgs.loupe}/bin/loupe "$@"'';
           orhan = true;
         }];
 
         copy = [{
-          exec = ''wl-copy < "$@"'';
+          run = ''wl-copy < "$@"'';
           orhan = true;
         }];
       };

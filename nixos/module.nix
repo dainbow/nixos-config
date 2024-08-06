@@ -20,15 +20,13 @@
     # ./steam.nix
     ./hyprland.nix
     ./bluetooth.nix
+    # ./ccache.nix
   ];
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      system-features =
-        [ "benchmark" "big-parallel" "kvm" "nixos-test" "gccarch-znver3" ];
-
       auto-optimise-store = true;
+      experimental-features = [ "nix-command" "flakes" ];
     };
 
     gc = {
@@ -39,15 +37,6 @@
 
     package = pkgs.lix;
   };
-
-  # nixpkgs.hostPlatform = {
-  #   gcc = {
-  #     arch = "znver3";
-  #     tune = "znver3";
-  #   };
-
-  #   system = "x86_64-linux";
-  # };
 
   time.timeZone = "Europe/Moscow";
 

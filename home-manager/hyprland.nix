@@ -14,6 +14,7 @@
     killall
     cliphist
     networkmanager_dmenu
+    brightnessctl
     xorg.xhost
   ];
 
@@ -48,9 +49,18 @@
       misc = {
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
+        vfr = true;
       };
 
-      decoration = { rounding = 10; };
+      decoration = { 
+        rounding = 10; 
+        
+        blur = {
+          enabled = false;
+        };
+        
+        drop_shadow = false;
+      };
 
       exec-once = [
         "${pkgs.polkit-kde-agent}/libexec/.polkit-kde-authentication-agent-1-wrapped"
@@ -123,6 +133,9 @@
         
         ", XF86KbdBrightnessDown, exec, asusctl -p"
         ", XF86KbdBrightnessUp, exec, asusctl -n"
+      
+        ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
+        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
       ];
 
       windowrule = [

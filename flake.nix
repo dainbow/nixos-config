@@ -11,11 +11,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # lix = {
-    #   url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix";
@@ -36,7 +31,7 @@
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.nixosModules.nur
           disko.nixosModules.disko
-          # lix.nixosModules.default
+          
           ./nixos/module.nix
 
           {

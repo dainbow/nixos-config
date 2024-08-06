@@ -6,6 +6,7 @@
     dust
 
     fastfetch
+    onefetch
     nvtopPackages.full
   ];
 }

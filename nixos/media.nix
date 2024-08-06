@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, ... }: { 
   environment.systemPackages = with pkgs; [
     telegram-desktop
     loupe
@@ -28,11 +28,11 @@
 
     (let
       name = "hiddify";
-      version = "1.5.2";
+      version = "2.0.5";
       src = fetchurl {
         url =
           "https://github.com/hiddify/hiddify-next/releases/download/v${version}/Hiddify-Linux-x64.AppImage";
-        hash = "sha256-QfdWxM8pOZxipg9htwi/QWzexYYFjhI8419NrAmyrEY=";
+        hash = "sha256-zVwSBiKYMK0GjrUpPQrd0PaexJ4F2D9TNS/Sk8BX4BE=";
       };
     in appimageTools.wrapType2 {
       inherit name version src;
