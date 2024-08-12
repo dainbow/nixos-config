@@ -1,6 +1,6 @@
 { ... }: {
   imports = [
-    ./alacritty.nix
+    ./terminal.nix
     # ./dconf.nix
     ./direnv.nix
     ./git.nix

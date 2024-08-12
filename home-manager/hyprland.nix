@@ -52,13 +52,11 @@
         vfr = true;
       };
 
-      decoration = { 
-        rounding = 10; 
-        
-        blur = {
-          enabled = false;
-        };
-        
+      decoration = {
+        rounding = 10;
+
+        blur = { enabled = false; };
+
         drop_shadow = false;
       };
 
@@ -78,7 +76,8 @@
         "$mod, T, exec, foot"
         "$mod, Y, exec, foot yazi"
 
-        ''$mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
+        ''
+          $mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
 
         "$mod, D, exec, rofi -show drun"
 
@@ -130,10 +129,10 @@
         ", XF86AudioRaiseVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+"
         ", XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
         ", XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        
+
         ", XF86KbdBrightnessDown, exec, asusctl -p"
         ", XF86KbdBrightnessUp, exec, asusctl -n"
-      
+
         ", XF86MonBrightnessDown, exec, brightnessctl set 5%-"
         ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
       ];
@@ -144,7 +143,7 @@
 
         "fullscreen, title:^(Media viewer)$"
         "float, title:^(Media viewer)$"
-        
+
         "float, title:^(satty)$"
         "stayfocused, title:^(satty)$"
         "opaque, title:^(satty)$"

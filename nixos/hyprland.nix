@@ -1,4 +1,4 @@
-{ pkgs, mainUser, ... }: {
+{ config, mainUser, ... }: {
   programs.hyprland = { enable = true; };
   programs.hyprlock.enable = true;
 
@@ -9,7 +9,7 @@
 
     settings = rec {
       initial_session = {
-        command = "${pkgs.hyprland}/bin/hyprland";
+        command = "${config.programs.hyprland.package}/bin/hyprland";
         user = mainUser;
       };
 

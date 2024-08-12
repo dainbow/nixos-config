@@ -1,6 +1,6 @@
-{ pkgs, ... }: { 
+{ pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    telegram-desktop
+    telegram-desktop_git
     loupe
     transmission_4-gtk
     vlc
