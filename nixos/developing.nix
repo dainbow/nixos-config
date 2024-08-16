@@ -7,7 +7,7 @@
     nil
     nixfmt-classic
     clang-tools
-    typst-lsp
+    # typst-lsp
     rust-analyzer
     yaml-language-server
     taplo

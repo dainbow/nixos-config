@@ -9,11 +9,11 @@
     # Thorium browser
     (let
       name = "thorium";
-      version = "124.0.6367.218";
+      version = "126.0.6478.231";
       src = fetchurl {
         url =
           "https://github.com/Alex313031/thorium/releases/download/M${version}/Thorium_Browser_${version}_AVX2.AppImage";
-        hash = "sha256-y15pJWps+CdU9zNz+8eobBv09ENHJmUt14d9D+tzj98=";
+        hash = "sha256-9JoPftspzmkIi+UO2PuoltN2Op7d1hiRaskr1gklJSw=";
       };
       appimageContents = appimageTools.extractType2 { inherit name src; };
     in appimageTools.wrapType2 {

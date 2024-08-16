@@ -2,13 +2,8 @@
   description = "My system conf";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
-    hyprland = {
-      type = "git";
-      url = "https://github.com/hyprwm/Hyprland.git";
-      submodules = true;
-    };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -16,6 +11,8 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";

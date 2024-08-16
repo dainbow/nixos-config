@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, nixosConfig, ... }: {
   services.hyprpaper.enable = true;
 
   programs.rofi = {
@@ -25,6 +25,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    package = nixosConfig.programs.hyprland.package;
 
     settings = {
       general = {
