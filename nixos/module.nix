@@ -21,6 +21,7 @@
     ./hyprland.nix
     ./bluetooth.nix
     # ./ccache.nix
+    ./virtualisation.nix
   ];
 
   nix = {
@@ -40,6 +41,11 @@
     };
 
     package = pkgs.lix;
+  };
+
+  system.switch = {
+    enableNg = true;
+    enable = false;
   };
 
   time.timeZone = "Europe/Moscow";
