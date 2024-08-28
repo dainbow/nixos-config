@@ -21,7 +21,7 @@
     ./hyprland.nix
     ./bluetooth.nix
     # ./ccache.nix
-    ./virtualisation.nix
+    # ./virtualisation.nix
   ];
 
   nix = {

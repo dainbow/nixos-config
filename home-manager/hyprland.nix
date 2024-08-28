@@ -6,11 +6,14 @@
     package = pkgs.rofi-wayland;
   };
 
+  services.mako.enable = true;
+
   home.packages = with pkgs; [
     grim
     slurp
     satty
     wl-clipboard
+    wf-recorder
     killall
     cliphist
     networkmanager_dmenu
