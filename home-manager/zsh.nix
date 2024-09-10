@@ -8,7 +8,7 @@
     syntaxHighlighting = { enable = true; };
 
     shellAliases = {
-      l = "exa -la";
+      l = "exa -la --icons";
       c = "clear";
       record =
         ''${pkgs.wf-recorder}/bin/wf-recorder -g "$(${pkgs.slurp}/bin/slurp)"'';

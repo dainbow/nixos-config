@@ -5,6 +5,7 @@
     transmission_4-gtk
     vlc
     tor-browser
+    discord
 
     # Thorium browser
     (let

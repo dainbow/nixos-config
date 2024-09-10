@@ -5,6 +5,9 @@
 
     dust
 
+    tldr
+    nix-output-monitor
+
     fastfetch
     onefetch
     nvtopPackages.full

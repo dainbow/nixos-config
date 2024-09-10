@@ -16,6 +16,7 @@
     ./hyprland.nix
     ./hyprlock.nix
     ./waybar.nix
+    ./vscode.nix
   ];
 
   home.stateVersion = "24.11";
