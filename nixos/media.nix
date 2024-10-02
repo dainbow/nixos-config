@@ -1,11 +1,11 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    telegram-desktop_git
+    telegram-desktop
     loupe
     transmission_4-gtk
-    vlc
     tor-browser
     discord
+    zoom-us
 
     # Thorium browser
     (let

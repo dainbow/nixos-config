@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
@@ -22,7 +22,7 @@
 
       opener = {
         play = [{
-          run = ''${pkgs.vlc}/bin/vlc "$@"'';
+          run = ''${config.programs.mpv.finalPackage}/bin/mpv "$@"'';
           orphan = true;
         }];
 

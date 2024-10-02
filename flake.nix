@@ -52,6 +52,7 @@
 
           {
             home-manager = {
+              useGlobalPkgs = true;
               users."${mainUser}" = { imports = [ ./home-manager/home.nix ]; };
             };
           }

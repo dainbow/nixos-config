@@ -1,1 +1,1 @@
-{ config, pkgs, ... }: { boot.kernelPackages = pkgs.linuxPackages_cachyos-lto; }
+{ config, pkgs, ... }: { boot.kernelPackages = pkgs.linuxPackages_cachyos; }

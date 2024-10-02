@@ -9,7 +9,7 @@
 
     settings = rec {
       initial_session = {
-        command = "${config.programs.hyprland.package}/bin/hyprland";
+        command = "${config.programs.hyprland.package}/bin/Hyprland";
         user = mainUser;
       };
 
