@@ -12,7 +12,7 @@
     ./cli.nix
     ./yazi.nix
     ./qt.nix
-    # ./firefox.nix
+    ./firefox.nix
     ./hyprland.nix
     ./hyprlock.nix
     ./waybar.nix

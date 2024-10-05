@@ -1,14 +1,42 @@
-{ nixosConfig, ... }: {
+{ nixosConfig, pkgs, ... }: {
   programs.firefox = {
     enable = true;
+    package = pkgs.firefox_nightly;
+    betterfox.enable = true;
 
     profiles.default = {
       id = 0;
       name = "Pavel";
-      settings = {
-        # Browser settings go here
-        "browser.startup.homepage" = "https://google.com";
 
+      betterfox = {
+        enable = true;
+        enableAllSections = true;
+      };
+
+      bookmarks = [
+        {
+          name = "Opennet";
+          url = "https://opennet.ru/";
+        }
+        {
+          name = "Youtube";
+          url = "https://www.youtube.com/";
+        }
+        {
+          name = "Vk";
+          url = "https://vk.com";
+        }
+        {
+          name = "Rutracker";
+          url = "https://rutracker.org";
+        }
+        {
+          name = "Github";
+          url = "https://github.com/";
+        }
+      ];
+
+      settings = {
         # Slim tabs
         "browser.uidensity" = 1;
 
@@ -53,17 +81,15 @@
         "toolkit.telemetry.unified" = false;
         "toolkit.telemetry.updatePing.enabled" = false;
         "toolkit.telemetry.previousBuildID" = "";
-        "toolkit.telemetry.server" = "";
         "toolkit.telemetry.server_owner" = "";
+
+        "toolkit.tabbox.switchByScrolling" = true;
 
         "datareporting.healthreport.infoURL" = "";
         "datareporting.healthreport.uploadEnabled" = false;
         "datareporting.policy.dataSubmissionEnabled" = false;
         "datareporting.policy.firstRunURL" = "";
 
-        # Disable video open animations
-        "full-screen-api.transition-duration.enter" = 0;
-        "full-screen-api.transition-duration.leave" = 0;
         "full-screen-api.warning.timeout" = 0;
 
         # As well as Firefox 'experiments'
@@ -88,7 +114,6 @@
       extensions = with nixosConfig.nur.repos.rycee.firefox-addons; [
         ublock-origin
         privacy-badger
-        darkreader
         sponsorblock
         gesturefy
       ];

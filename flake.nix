@@ -18,10 +18,11 @@
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix";
     hosts.url = "github:StevenBlack/hosts";
+    betterfox.url = "github:HeitorAugustoLN/betterfox-nix";
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, hosts
-    , chaotic, hyprland, ... }@inputs:
+    , chaotic, hyprland, betterfox, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -53,7 +54,12 @@
           {
             home-manager = {
               useGlobalPkgs = true;
-              users."${mainUser}" = { imports = [ ./home-manager/home.nix ]; };
+              users."${mainUser}" = {
+                imports = [
+                  betterfox.homeManagerModules.betterfox
+                  ./home-manager/home.nix
+                ];
+              };
             };
           }
         ];

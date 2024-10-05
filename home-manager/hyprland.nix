@@ -87,7 +87,7 @@
         "$mod, D, exec, rofi -show drun"
 
         "$mod, B, exec, waybar"
-        "$mod SHIFT, B, exec, killall -SIGUSR1 .waybar-wrapped"
+        "$mod SHIFT, B, exec, killall -SIGKILL .waybar-wrapped"
 
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mod, N, exec, networkmanager_dmenu"
