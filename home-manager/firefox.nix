@@ -116,6 +116,7 @@
         privacy-badger
         sponsorblock
         gesturefy
+        return-youtube-dislikes
       ];
     };
   };

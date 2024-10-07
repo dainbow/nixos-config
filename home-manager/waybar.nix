@@ -30,6 +30,7 @@
         "battery"
         "cpu"
         "memory"
+        "custom/supergfxctl"
         "tray"
       ];
 
@@ -174,6 +175,56 @@
           }
         '';
         on-click = "asusctl profile -n";
+
+        tooltip = false;
+        interval = refreshInterval;
+      };
+      "custom/supergfxctl" = {
+        format = "{}";
+        return-type = "json";
+
+        exec = ''
+          ${pkgs.bash}/bin/bash ${
+            pkgs.writers.writeBash "supergfxctlStateScript" ''
+              state=$(supergfxctl -g)
+
+              case $state in
+                *Integrated*)
+                  echo "{\"text\":\"🔴\"}"
+                  ;;
+                *Hybrid*)
+                  echo "{\"text\":\"🟢\"}"
+                  ;;
+                *)
+                  echo 'zalupa'
+                ;;
+              esac
+
+              exit 0
+            ''
+          }
+        '';
+        on-click = ''
+          ${pkgs.bash}/bin/bash ${
+            pkgs.writers.writeBash "supergfxctlChangeScript" ''
+              state=$(supergfxctl -g)
+
+              case $state in
+                *Integrated*)
+                  supergfxctl -m Hybrid
+                  ;;
+                *Hybrid*)
+                  supergfxctl -m Integrated
+                  ;;
+                *)
+                  echo 'zalupa'
+                ;;
+              esac
+
+              exit 0
+            ''
+          }
+        '';
 
         tooltip = false;
         interval = refreshInterval;

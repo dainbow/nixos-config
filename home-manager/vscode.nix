@@ -16,6 +16,7 @@
         "workbench.action.tasks.runTask"
       ];
       "haskell.manageHLS" = "PATH";
+      "redhat.telemetry.enabled" = false;
     };
 
     extensions = with pkgs.vscode-extensions; [

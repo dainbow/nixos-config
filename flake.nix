@@ -12,7 +12,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
@@ -22,7 +22,7 @@
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, hosts
-    , chaotic, hyprland, betterfox, ... }@inputs:
+    , chaotic, betterfox, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -37,7 +37,7 @@
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.nixosModules.nur
           disko.nixosModules.disko
-          hyprland.nixosModules.default
+          # hyprland.nixosModules.default
 
           (hosts.nixosModule {
             config.networking.stevenBlackHosts = {
