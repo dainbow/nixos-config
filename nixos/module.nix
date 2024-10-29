@@ -22,6 +22,7 @@
     ./bluetooth.nix
     # ./ccache.nix
     ./virtualisation.nix
+    ./tlp.nix
   ];
 
   nix = {

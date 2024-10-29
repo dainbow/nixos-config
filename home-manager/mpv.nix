@@ -28,9 +28,6 @@
         "script-binding uosc/next; script-message-to uosc flash-elements top_bar,timeline #! Next";
       "<" =
         "script-binding uosc/prev; script-message-to uosc flash-elements top_bar,timeline #! Prev";
-      f = "script-binding quality_menu/video_formats_toggle #! Video format";
-      "alt+f" =
-        "script-binding quality_menu/audio_formats_toggle #! Audio format";
     };
 
     config = {
@@ -38,8 +35,7 @@
       cache = "auto";
       video-sync = "display-resample";
       ytdl-format = "bestvideo[height<=?1080]+bestaudio/best";
-      profile = "high-quality";
-      gpu-api = "vulkan";
+      profile = "fast";
     };
   };
 }
