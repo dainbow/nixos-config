@@ -1,7 +1,6 @@
 { nixosConfig, pkgs, ... }: {
   programs.firefox = {
     enable = true;
-    package = pkgs.firefox_nightly;
     betterfox.enable = true;
 
     profiles.default = {
@@ -13,28 +12,31 @@
         enableAllSections = true;
       };
 
-      bookmarks = [
-        {
-          name = "Opennet";
-          url = "https://opennet.ru/";
-        }
-        {
-          name = "Youtube";
-          url = "https://www.youtube.com/";
-        }
-        {
-          name = "Vk";
-          url = "https://vk.com";
-        }
-        {
-          name = "Rutracker";
-          url = "https://rutracker.org";
-        }
-        {
-          name = "Github";
-          url = "https://github.com/";
-        }
-      ];
+      bookmarks = [{
+        toolbar = true;
+        bookmarks = [
+          {
+            name = "Opennet";
+            url = "https://opennet.ru/";
+          }
+          {
+            name = "Youtube";
+            url = "https://www.youtube.com/";
+          }
+          {
+            name = "Vk";
+            url = "https://vk.com";
+          }
+          {
+            name = "Rutracker";
+            url = "https://rutracker.org";
+          }
+          {
+            name = "Github";
+            url = "https://github.com/";
+          }
+        ];
+      }];
 
       settings = {
         # Slim tabs
@@ -117,6 +119,7 @@
         sponsorblock
         gesturefy
         return-youtube-dislikes
+        enhancer-for-youtube
       ];
     };
   };

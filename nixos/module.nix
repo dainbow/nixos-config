@@ -17,7 +17,7 @@
     # ./fingerprint.nix
     ./nvidia.nix
     ./stylix.nix
-    # ./steam.nix
+    ./steam.nix
     ./hyprland.nix
     ./bluetooth.nix
     # ./ccache.nix

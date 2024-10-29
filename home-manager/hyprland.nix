@@ -20,6 +20,7 @@
     brightnessctl
     playerctl
     xorg.xhost
+    kdePackages.qtwayland
   ];
 
   xdg.configFile."networkmanager-dmenu/config.ini".text = ''

@@ -2,7 +2,10 @@
   programs.hyprland = { enable = true; };
   programs.hyprlock.enable = true;
 
-  environment.sessionVariables = { NIXOS_OZONE_WL = "1"; };
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland";
+  };
 
   services.greetd = {
     enable = true;

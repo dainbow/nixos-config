@@ -2,6 +2,7 @@
   environment.systemPackages = with pkgs; [
     zip
     ripunzip
+    unrar
 
     dust
 

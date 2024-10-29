@@ -4,8 +4,8 @@
     loupe
     transmission_4-gtk
     tor-browser
-    discord
     zoom-us
+    # kdePackages.kdenlive
 
     # Thorium browser
     # (let
