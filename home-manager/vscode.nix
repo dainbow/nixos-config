@@ -17,6 +17,9 @@
       ];
       "haskell.manageHLS" = "PATH";
       "redhat.telemetry.enabled" = false;
+
+      "tinymist.preview.scrollSync" = "onSelectionChange";
+      "tinymist.formatterMode" = "typstyle";
     };
 
     extensions = with pkgs.vscode-extensions; [
@@ -29,6 +32,7 @@
       ms-vscode-remote.remote-containers
       haskell.haskell
       justusadam.language-haskell
+      tomoki1207.pdf
     ];
   };
 }

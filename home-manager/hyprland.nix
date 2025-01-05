@@ -63,7 +63,7 @@
 
         blur = { enabled = false; };
 
-        drop_shadow = false;
+        # drop_shadow = false;
       };
 
       exec-once = [
@@ -153,12 +153,14 @@
         "float, ^(Rofi)$"
         "stayfocused, ^(Rofi)$"
 
-        "fullscreen, title:^(Media viewer)$"
-        "float, title:^(Media viewer)$"
-
         "float, title:^(satty)$"
         "stayfocused, title:^(satty)$"
         "opaque, title:^(satty)$"
+      ];
+
+      windowrulev2 = [
+        "fullscreen, class:org.telegram.desktop, title:Media viewer"
+        "float, class:org.telegram.desktop, title:Media viewer"
       ];
     };
   };

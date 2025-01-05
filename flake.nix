@@ -35,7 +35,7 @@
           stylix.nixosModules.stylix
           home-manager.nixosModules.home-manager
           nixos-hardware.nixosModules.asus-zephyrus-ga401
-          nur.nixosModules.nur
+          nur.modules.nixos.default
           disko.nixosModules.disko
           # hyprland.nixosModules.default
 

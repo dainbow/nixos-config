@@ -1,4 +1,4 @@
-{ nixosConfig, pkgs, ... }: {
+{ pkgs, ... }: {
   programs.firefox = {
     enable = true;
     betterfox.enable = true;
@@ -113,7 +113,7 @@
         "extensions.autoDisableScopes" = 0;
       };
 
-      extensions = with nixosConfig.nur.repos.rycee.firefox-addons; [
+      extensions = with pkgs.nur.repos.rycee.firefox-addons; [
         ublock-origin
         privacy-badger
         sponsorblock

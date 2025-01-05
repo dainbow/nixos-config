@@ -7,6 +7,7 @@
     dust
 
     tldr
+    glow
     nix-output-monitor
 
     fastfetch
