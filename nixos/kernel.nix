@@ -1,1 +1,11 @@
-{ config, pkgs, ... }: { boot.kernelPackages = pkgs.linuxPackages_cachyos; }
+{ pkgs, ... }: { 
+  boot = {
+    kernelPackages = pkgs.linuxPackages_cachyos; 
+    
+    kernelParams = [
+      "quiet"
+      "splash"
+    ];
+    loader.timeout = 1;
+  };
+}
