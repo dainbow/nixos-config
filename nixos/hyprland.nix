@@ -4,9 +4,7 @@
 
   xdg.portal = {
     enable = true;
-    extraPortals = with pkgs; [
-      xdg-desktop-portal-hyprland
-    ];
+    extraPortals = with pkgs; [ xdg-desktop-portal-hyprland ];
     config.common.default = "*";
   };
 
@@ -27,6 +25,4 @@
       default_session = initial_session;
     };
   };
-
-  security.polkit.enable = true;
 }

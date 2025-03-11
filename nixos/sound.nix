@@ -11,4 +11,6 @@
   };
 
   environment.systemPackages = with pkgs; [ pavucontrol ];
+
+  services.speechd.enable = false;
 }

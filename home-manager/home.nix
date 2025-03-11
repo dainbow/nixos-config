@@ -5,7 +5,7 @@
     ./direnv.nix
     ./git.nix
     # ./gnome_extensions.nix
-    ./gtk.nix
+    # ./gtk.nix
     ./helix.nix
     ./starship.nix
     ./zsh.nix
