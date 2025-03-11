@@ -9,6 +9,11 @@
     enableZshIntegration = true;
   };
 
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
+  };
+
   programs.fd = { enable = true; };
 
   programs.ripgrep = { enable = true; };

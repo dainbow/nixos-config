@@ -19,8 +19,8 @@
     networkmanager_dmenu
     brightnessctl
     playerctl
+
     xorg.xhost
-    kdePackages.qtwayland
   ];
 
   xdg.configFile."networkmanager-dmenu/config.ini".text = ''
@@ -67,7 +67,6 @@
       };
 
       exec-once = [
-        "${pkgs.polkit-kde-agent}/libexec/.polkit-kde-authentication-agent-1-wrapped"
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "xhost +local:"

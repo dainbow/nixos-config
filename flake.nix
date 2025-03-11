@@ -12,6 +12,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    solaar = {
+      url = "github:Svenum/Solaar-Flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     disko.url = "github:nix-community/disko";
@@ -22,7 +27,7 @@
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, hosts
-    , chaotic, betterfox, ... }@inputs:
+    , chaotic, betterfox, solaar, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -37,6 +42,7 @@
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.modules.nixos.default
           disko.nixosModules.disko
+          solaar.nixosModules.default
           # hyprland.nixosModules.default
 
           (hosts.nixosModule {
@@ -46,6 +52,7 @@
               blockGambling = true;
               blockPorn = false;
               blockSocial = false;
+              enableIPv6 = false;
             };
           })
 

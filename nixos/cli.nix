@@ -1,17 +1,18 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
     zip
-    ripunzip
+    unzip
     unrar
+
+    simple-mtpfs
+    usbutils
 
     dust
 
     tldr
-    glow
-    nix-output-monitor
 
     fastfetch
     onefetch
-    nvtopPackages.full
+    # nvtopPackages.full
   ];
 }
