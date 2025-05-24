@@ -8,12 +8,13 @@
 
     cursor = {
       package = pkgs.hackneyed;
+      size = 20;
       name = "Hackneyed";
     };
 
     fonts = {
       sizes = {
-        applications = 12;
+        applications = 15;
         terminal = 15;
         desktop = 10;
         popups = 10;

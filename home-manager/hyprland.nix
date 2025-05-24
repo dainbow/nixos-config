@@ -66,6 +66,8 @@
         # drop_shadow = false;
       };
 
+      env = [ "AQ_DRM_DEVICES, /dev/dri/card0:/dev/dri/card1" ];
+
       exec-once = [
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"

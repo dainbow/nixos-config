@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  stylix.targets.firefox.profileNames = [ "default" ];
+
   programs.firefox = {
     enable = true;
     betterfox.enable = true;
@@ -12,31 +14,34 @@
         enableAllSections = true;
       };
 
-      bookmarks = [{
-        toolbar = true;
-        bookmarks = [
-          {
-            name = "Opennet";
-            url = "https://opennet.ru/";
-          }
-          {
-            name = "Youtube";
-            url = "https://www.youtube.com/";
-          }
-          {
-            name = "Vk";
-            url = "https://vk.com";
-          }
-          {
-            name = "Rutracker";
-            url = "https://rutracker.org";
-          }
-          {
-            name = "Github";
-            url = "https://github.com/";
-          }
-        ];
-      }];
+      bookmarks = {
+        force = true;
+        settings = [{
+          toolbar = true;
+          bookmarks = [
+            {
+              name = "Opennet";
+              url = "https://opennet.ru/";
+            }
+            {
+              name = "Youtube";
+              url = "https://www.youtube.com/";
+            }
+            {
+              name = "Vk";
+              url = "https://vk.com";
+            }
+            {
+              name = "Rutracker";
+              url = "https://rutracker.org";
+            }
+            {
+              name = "Github";
+              url = "https://github.com/";
+            }
+          ];
+        }];
+      };
 
       settings = {
         # Slim tabs

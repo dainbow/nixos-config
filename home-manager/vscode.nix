@@ -22,20 +22,22 @@
         "tinymist.formatterMode" = "typstyle";
       };
 
-      extensions = with pkgs.vscode-extensions; [
-        mkhl.direnv
-        redhat.java
-        myriad-dreamin.tinymist
-        llvm-vs-code-extensions.vscode-clangd
-        # rust-lang.rust-analyzer
-        ms-azuretools.vscode-docker
-        ms-vscode-remote.remote-containers
-        haskell.haskell
-        justusadam.language-haskell
-        tomoki1207.pdf
-        dart-code.flutter
-        dart-code.dart-code
-      ];
+      extensions = with pkgs.vscode-marketplace;
+        with pkgs.vscode-extensions; [
+          mkhl.direnv
+          redhat.java
+          myriad-dreamin.tinymist
+          llvm-vs-code-extensions.vscode-clangd
+          # rust-lang.rust-analyzer
+          ms-azuretools.vscode-docker
+          ms-vscode-remote.remote-containers
+          haskell.haskell
+          justusadam.language-haskell
+          tomoki1207.pdf
+          dart-code.flutter
+          dart-code.dart-code
+          jasew.vscode-helix-emulation
+        ];
     };
   };
 }

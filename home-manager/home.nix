@@ -13,12 +13,14 @@
     ./yazi.nix
     ./qt.nix
     ./firefox.nix
+    ./chromium.nix
     ./hyprland.nix
     ./hyprlock.nix
     ./waybar.nix
     ./vscode.nix
     ./mpv.nix
     ./bluetooth.nix
+    ./zathura.nix
   ];
 
   home.stateVersion = "24.11";

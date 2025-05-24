@@ -2,13 +2,13 @@
   description = "My system conf";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -17,17 +17,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:danth/stylix/release-25.05";
     hosts.url = "github:StevenBlack/hosts";
     betterfox.url = "github:HeitorAugustoLN/betterfox-nix";
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, hosts
-    , chaotic, betterfox, solaar, ... }@inputs:
+    , chaotic, betterfox, solaar, vscode-extensions, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -44,6 +46,7 @@
           disko.nixosModules.disko
           solaar.nixosModules.default
           # hyprland.nixosModules.default
+          { nixpkgs.overlays = [ vscode-extensions.overlays.default ]; }
 
           (hosts.nixosModule {
             config.networking.stevenBlackHosts = {

@@ -13,6 +13,6 @@
 
     fastfetch
     onefetch
-    # nvtopPackages.full
+    (nvtopPackages.amd.override { nvidia = true; })
   ];
 }
