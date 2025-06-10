@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   programs.waybar = {
     enable = true;
 
@@ -13,6 +13,8 @@
 
       modules-left = [ "hyprland/workspaces" ];
       modules-center = [
+        "custom/weather"
+        "custom/separator"
         "clock#time"
         "custom/separator"
         "clock#week"
@@ -27,10 +29,11 @@
         "network"
         "bluetooth"
         "pulseaudio"
+        "custom/supergfxctl"
         "battery"
         "cpu"
         "memory"
-        "custom/supergfxctl"
+        "disk"
         "tray"
       ];
 
@@ -83,6 +86,7 @@
         format = "{icon}  {volume}%";
         format-muted = "󰸈";
         format-icons = { default = [ "" "" "" ]; };
+        tooltip = false;
       };
 
       battery = {
@@ -104,16 +108,22 @@
       };
 
       cpu = {
-        format = "󰻠  {usage}%";
+        format = "CPU {usage}%";
 
         interval = refreshInterval;
         tooltip = false;
       };
 
       memory = {
-        format = "  {percentage}%";
+        format = "RAM {percentage}%";
 
         interval = refreshInterval;
+        tooltip = false;
+      };
+
+      disk = {
+        interval = 5 * refreshInterval;
+        format = "DISK {percetage_free}%";
         tooltip = false;
       };
 
@@ -156,7 +166,7 @@
               state=$(asusctl profile -p)
 
               case $state in
-                *Quiet*)
+                *LowPower*)
                   echo "{\"text\":\"🍃\"}"
                   ;;
                 *Balanced*)
@@ -178,6 +188,13 @@
 
         tooltip = false;
         interval = refreshInterval;
+      };
+      "custom/weather" = {
+        format = "{}";
+        tooltip = true;
+        interval = 30 * refreshInterval;
+        exec = "${lib.getExe pkgs.wttrbar}";
+        return-type = "json";
       };
       "custom/supergfxctl" = {
         format = "{}";

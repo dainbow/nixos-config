@@ -39,6 +39,14 @@
               name = "Github";
               url = "https://github.com/";
             }
+            {
+              name = "Rutor";
+              url = "https://rutor.is/";
+            }
+            {
+              name = "ChatGPT";
+              url = "https://chatgpt.com/";
+            }
           ];
         }];
       };
@@ -125,6 +133,7 @@
         gesturefy
         return-youtube-dislikes
         enhancer-for-youtube
+        vimium
       ];
     };
   };

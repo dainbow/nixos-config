@@ -1,7 +1,10 @@
 { config, ... }: {
   hardware = {
     nvidia = {
-      powerManagement.finegrained = true;
+      powerManagement = {
+        enable = true;
+        finegrained = true;
+      };
       open = true;
 
       package = config.boot.kernelPackages.nvidiaPackages.stable;

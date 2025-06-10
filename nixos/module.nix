@@ -4,7 +4,7 @@
     ./cli.nix
     ./developing.nix
     ./disk-config.nix
-    # ./fonts_themes.nix
+    ./fonts_themes.nix
     # ./gdm.nix
     # ./gnome.nix
     ./hardware-configuration.nix

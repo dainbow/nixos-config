@@ -50,7 +50,10 @@
 
       gestures = { workspace_swipe = true; };
 
-      cursor = { no_warps = true; };
+      cursor = {
+        no_warps = true;
+        no_hardware_cursors = true;
+      };
 
       misc = {
         disable_hyprland_logo = true;
@@ -66,7 +69,11 @@
         # drop_shadow = false;
       };
 
-      env = [ "AQ_DRM_DEVICES, /dev/dri/card0:/dev/dri/card1" ];
+      env = [
+        "AQ_DRM_DEVICES, /dev/dri/card0:/dev/dri/card1"
+        "LIBVA_DRIVER_NAME,nvidia"
+        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+      ];
 
       exec-once = [
         "wl-paste --type text --watch cliphist store"
@@ -151,8 +158,8 @@
       ];
 
       windowrule = [
-        "float, ^(Rofi)$"
-        "stayfocused, ^(Rofi)$"
+        "float, title:^(Rofi)$"
+        "stayfocused, title:^(Rofi)$"
 
         "float, title:^(satty)$"
         "stayfocused, title:^(satty)$"
