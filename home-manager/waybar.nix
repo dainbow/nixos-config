@@ -123,7 +123,8 @@
 
       disk = {
         interval = 5 * refreshInterval;
-        format = "DISK {percetage_free}%";
+        format = "DISK {percentage_free}%";
+        path = "/";
         tooltip = false;
       };
 
