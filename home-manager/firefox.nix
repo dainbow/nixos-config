@@ -126,15 +126,45 @@
         "extensions.autoDisableScopes" = 0;
       };
 
-      extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
-        ublock-origin
-        privacy-badger
-        sponsorblock
-        gesturefy
-        return-youtube-dislikes
-        enhancer-for-youtube
-        vimium
-      ];
+      extensions = {
+        force = true;
+
+        packages = with pkgs.nur.repos.rycee.firefox-addons; [
+          ublock-origin
+          privacy-badger
+          sponsorblock
+          gesturefy
+          return-youtube-dislikes
+          enhancer-for-youtube
+          vimium
+          bitwarden
+        ];
+        settings = {
+          "uBlock0@raymondhill.net".settings = let
+            extendedList =
+              "https://raw.githubusercontent.com/Zalexanninev15/NoADS_RU/main/ads_list_extended.txt";
+          in {
+            ignoreGenericCosmeticFilters = true;
+            selectedFilterLists = [
+              "user-filters"
+              "ublock-filters"
+              "ublock-badware"
+              "ublock-privacy"
+              "ublock-unbreak"
+              "ublock-quick-fixes"
+              "easylist"
+              "easyprivacy"
+              "urlhaus-1"
+              "plowe-0"
+              "RUS-0"
+              "RUS-1"
+              extendedList
+            ];
+            externalLists = extendedList;
+            importedLists = [ extendedList ];
+          };
+        };
+      };
     };
   };
 }
