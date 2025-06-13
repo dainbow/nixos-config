@@ -31,6 +31,9 @@
     };
 
     config = {
+      vo = "gpu-next";
+      gpu-context = "wayland";
+      hwdec = "auto";
       osd-bar = "no";
       cache = "auto";
       video-sync = "display-resample";

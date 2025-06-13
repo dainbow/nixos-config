@@ -66,13 +66,14 @@
 
         blur = { enabled = false; };
 
+        shadow = { enabled = false; };
         # drop_shadow = false;
       };
 
       env = [
-        "AQ_DRM_DEVICES, /dev/dri/card0:/dev/dri/card1"
-        "LIBVA_DRIVER_NAME,nvidia"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
+        "LIBVA_DRIVER_NAME,radeonsi"
+        "VDPAU_DRIVER,radeonsi"
+        "AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1"
       ];
 
       exec-once = [

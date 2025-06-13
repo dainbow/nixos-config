@@ -24,12 +24,11 @@
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-25.05";
-    hosts.url = "github:StevenBlack/hosts";
     betterfox.url = "github:HeitorAugustoLN/betterfox-nix";
   };
 
-  outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, hosts
-    , chaotic, betterfox, solaar, vscode-extensions, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, chaotic
+    , betterfox, solaar, vscode-extensions, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -47,17 +46,6 @@
           solaar.nixosModules.default
           # hyprland.nixosModules.default
           { nixpkgs.overlays = [ vscode-extensions.overlays.default ]; }
-
-          (hosts.nixosModule {
-            config.networking.stevenBlackHosts = {
-              enable = true;
-              blockFakenews = true;
-              blockGambling = true;
-              blockPorn = false;
-              blockSocial = false;
-              enableIPv6 = false;
-            };
-          })
 
           ./nixos/module.nix
 

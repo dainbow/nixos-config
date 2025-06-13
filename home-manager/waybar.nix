@@ -26,10 +26,10 @@
       modules-right = [
         "hyprland/language"
         "custom/asusctl"
+        "custom/supergfxctl"
         "network"
         "bluetooth"
         "pulseaudio"
-        "custom/supergfxctl"
         "battery"
         "cpu"
         "memory"
@@ -185,7 +185,7 @@
             ''
           }
         '';
-        on-click = "asusctl profile -n";
+        on-double-click = "asusctl profile -n";
 
         tooltip = false;
         interval = refreshInterval;
@@ -194,7 +194,7 @@
         format = "{}";
         tooltip = true;
         interval = 30 * refreshInterval;
-        exec = "${lib.getExe pkgs.wttrbar}";
+        exec = "${lib.getExe pkgs.wttrbar} --location Moscow";
         return-type = "json";
       };
       "custom/supergfxctl" = {
@@ -222,7 +222,7 @@
             ''
           }
         '';
-        on-click = ''
+        on-double-click = ''
           ${pkgs.bash}/bin/bash ${
             pkgs.writers.writeBash "supergfxctlChangeScript" ''
               state=$(supergfxctl -g)
