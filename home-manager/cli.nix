@@ -1,24 +1,28 @@
-{ pkgs, ... }: {
-  programs.eza = {
-    enable = true;
-    enableZshIntegration = true;
+{ ... }: {
+  programs = {
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    fd = { enable = true; };
+
+    ripgrep = { enable = true; };
+
+    ripgrep-all = { enable = true; };
+
+    bat = { enable = true; };
+
+    btop = { enable = true; };
   };
-
-  programs.fzf = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.zoxide = {
-    enable = true;
-    enableZshIntegration = true;
-  };
-
-  programs.fd = { enable = true; };
-
-  programs.ripgrep = { enable = true; };
-
-  programs.bat = { enable = true; };
-
-  programs.btop = { enable = true; };
 }

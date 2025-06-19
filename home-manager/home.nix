@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./terminal.nix
+    ./tldr.nix
     # ./dconf.nix
     ./direnv.nix
     ./git.nix

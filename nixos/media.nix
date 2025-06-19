@@ -4,7 +4,6 @@
     loupe
     transmission_4-gtk
     tor-browser
-    libreoffice
     # hiddify-app
     # kdePackages.kdenlive
 

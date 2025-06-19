@@ -8,8 +8,7 @@
     usbutils
 
     dust
-
-    tldr
+    duf
 
     fastfetch
     onefetch

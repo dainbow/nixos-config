@@ -10,14 +10,10 @@
         auto-format = true;
 
         language-servers = [ "nixd" ];
-        formatter = {
-          command = lib.getExe pkgs.nixfmt-classic;
-        };
+        formatter = { command = lib.getExe pkgs.nixfmt-classic; };
       }];
 
-      language-server = {
-        nixd.command = lib.getExe pkgs.nixd; 
-      };
+      language-server = { nixd.command = lib.getExe pkgs.nixd; };
     };
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ ... }: {
   # Zsh config with aliases
   programs.zsh = {
     enable = true;
@@ -8,10 +8,9 @@
     syntaxHighlighting = { enable = true; };
 
     shellAliases = {
-      l = "exa -la --icons";
+      l = "lla";
       c = "clear";
-      record =
-        ''${pkgs.wf-recorder}/bin/wf-recorder -g "$(${pkgs.slurp}/bin/slurp)"'';
+      cd = "z";
     };
 
     oh-my-zsh = {

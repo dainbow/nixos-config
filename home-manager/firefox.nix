@@ -163,6 +163,12 @@
             externalLists = extendedList;
             importedLists = [ extendedList ];
           };
+
+          "enhancerforyoutube@maximerf.addons.mozilla.org".settings = {
+            controls = [ "speed" "options" ];
+            newestcomments = true;
+            speed = 2;
+          };
         };
       };
     };
