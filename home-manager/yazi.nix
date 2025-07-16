@@ -1,4 +1,4 @@
-{ pkgs, config, ... }: {
+{ lib, pkgs, config, ... }: {
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
@@ -22,12 +22,12 @@
 
       opener = {
         play = [{
-          run = ''${config.programs.mpv.finalPackage}/bin/mpv "$@"'';
+          run = ''${lib.getExe config.programs.mpv.finalPackage} "$@"'';
           orphan = true;
         }];
 
         imager = [{
-          run = ''${pkgs.loupe}/bin/loupe "$@"'';
+          run = ''${lib.getExe pkgs.loupe} "$@"'';
           orhan = true;
         }];
 

@@ -168,6 +168,7 @@
             controls = [ "speed" "options" ];
             newestcomments = true;
             speed = 2;
+            theatermode = true;
           };
         };
       };

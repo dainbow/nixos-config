@@ -1,4 +1,5 @@
 { pkgs, lib, ... }: {
+  home.packages = with pkgs; [ nixd ];
   # Helix editor default choose
   programs.helix = {
     enable = true;
@@ -9,11 +10,8 @@
         name = "nix";
         auto-format = true;
 
-        language-servers = [ "nixd" ];
         formatter = { command = lib.getExe pkgs.nixfmt-classic; };
       }];
-
-      language-server = { nixd.command = lib.getExe pkgs.nixd; };
     };
   };
 }

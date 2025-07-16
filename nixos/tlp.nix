@@ -18,9 +18,11 @@
       RADEON_DPM_PERF_LEVEL_ON_AC = "auto";
 
       RADEON_DPM_STATE_ON_BAT = "battery";
-      RADEON_DPM_STATE_ON_AC = "performance";
+      RADEON_DPM_STATE_ON_AC = "balanced";
 
       USB_EXCLUDE_BTUSB = 1;
+
+      RUNTIME_PM_ON_AC = "auto";
     };
   };
 }

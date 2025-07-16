@@ -8,12 +8,9 @@
 
       sudo = { disabled = false; };
 
-      memory_usage = {
-        disabled = false;
-        threshold = 50;
-      };
-
-      os = { disabled = false; };
+      format = ''
+        $nix_shell$sudo$git_branch$git_commit$git_state$git_status$line_break
+        $username$directory$shell$character'';
     };
   };
 

@@ -16,9 +16,11 @@
     ./firefox.nix
     ./chromium.nix
     ./hyprland.nix
+    ./rofi.nix
+    ./mako.nix
     ./hyprlock.nix
     ./waybar.nix
-    ./vscode.nix
+    # ./vscode.nix
     ./mpv.nix
     ./bluetooth.nix
     ./zathura.nix

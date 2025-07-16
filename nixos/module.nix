@@ -1,13 +1,13 @@
-{ config, pkgs, ... }: {
+{ pkgs, ... }: {
   imports = [
     ./bootloader.nix
     ./cli.nix
-    ./developing.nix
     ./disk-config.nix
     ./fonts_themes.nix
     # ./gdm.nix
     # ./gnome.nix
     ./hardware-configuration.nix
+    # ./flatpak.nix
     ./kernel.nix
     ./media.nix
     ./sound.nix
@@ -21,7 +21,7 @@
     ./hyprland.nix
     ./bluetooth.nix
     # ./ccache.nix
-    ./virtualisation.nix
+    # ./virtualisation.nix
     ./tlp.nix
   ];
 
@@ -58,8 +58,6 @@
   time.timeZone = "Europe/Moscow";
 
   nixpkgs.config.allowUnfree = true;
-
-  programs.nix-ld.enable = true;
 
   # Do not touch
   system.stateVersion = "24.11";

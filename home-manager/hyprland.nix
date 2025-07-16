@@ -1,12 +1,5 @@
-{ pkgs, nixosConfig, ... }: {
-  services.hyprpaper.enable = true;
-
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-  };
-
-  services.mako.enable = true;
+{ lib, pkgs, nixosConfig, ... }: {
+  stylix.targets.hyprland.hyprpaper.enable = false;
 
   home.packages = with pkgs; [
     grim
@@ -14,19 +7,11 @@
     satty
     wl-clipboard
     wf-recorder
-    killall
     cliphist
     networkmanager_dmenu
     brightnessctl
     playerctl
-
-    xorg.xhost
   ];
-
-  xdg.configFile."networkmanager-dmenu/config.ini".text = ''
-    [dmenu]
-    dmenu_command = rofi -dmenu
-  '';
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -67,7 +52,6 @@
         blur = { enabled = false; };
 
         shadow = { enabled = false; };
-        # drop_shadow = false;
       };
 
       env = [
@@ -79,12 +63,20 @@
       exec-once = [
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
-        "xhost +local:"
       ];
 
       "$mod" = "SUPER";
 
-      bind = [
+      bind = let
+        toggleWaybar = pkgs.writeShellScriptBin "toggleWaybar" ''
+          if pgrep -x ".waybar-wrapped" > /dev/null
+          then
+            pkill -x ".waybar-wrapped"
+          else
+            waybar
+          fi
+        '';
+      in [
         "$mod, Q, killactive"
         "$mod, M, exit"
 
@@ -92,12 +84,11 @@
         "$mod, Y, exec, foot yazi"
 
         ''
-          $mod, P, exec, grim -g "$(slurp -o -r)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
+          $mod, P, exec, grim -g "$(slurp)" - | satty --filename - --fullscreen --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H:%M:%S').png''
 
         "$mod, D, exec, rofi -show drun"
 
-        "$mod, B, exec, waybar"
-        "$mod SHIFT, B, exec, killall -SIGKILL .waybar-wrapped"
+        "$mod, B, exec, ${lib.getExe toggleWaybar}"
 
         "$mod, V, exec, cliphist list | rofi -dmenu | cliphist decode | wl-copy"
         "$mod, N, exec, networkmanager_dmenu"

@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, pkgs, ... }: {
   # Zsh config with aliases
   programs.zsh = {
     enable = true;
@@ -11,6 +11,7 @@
       l = "lla";
       c = "clear";
       cd = "z";
+      rebuild = "sudo nixos-rebuild switch |& ${lib.getExe pkgs.nix-output-monitor}";
     };
 
     oh-my-zsh = {

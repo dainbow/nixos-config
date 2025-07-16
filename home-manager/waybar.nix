@@ -161,30 +161,28 @@
         format = "{}";
         return-type = "json";
 
-        exec = ''
-          ${pkgs.bash}/bin/bash ${
-            pkgs.writers.writeBash "asusctlScript" ''
-              state=$(asusctl profile -p)
+        exec = let
+          dispatchProfile = pkgs.writeShellScriptBin "dispatchProfile" ''
+            state=$(asusctl profile -p)
 
-              case $state in
-                *LowPower*)
-                  echo "{\"text\":\"🍃\"}"
-                  ;;
-                *Balanced*)
-                  echo "{\"text\":\"🖕\"}"
-                  ;;
-                *Performance*)
-                  echo "{\"text\":\"🔥\"}"
-                  ;;
-                *)
-                  echo 'zalupa'
+            case $state in
+              *LowPower*)
+                echo "{\"text\":\"🍃\"}"
                 ;;
-              esac
+              *Balanced*)
+                echo "{\"text\":\"🖕\"}"
+                ;;
+              *Performance*)
+                echo "{\"text\":\"🔥\"}"
+                ;;
+              *)
+                echo 'zalupa'
+              ;;
+            esac
 
-              exit 0
-            ''
-          }
-        '';
+            exit 0
+          '';
+        in lib.getExe dispatchProfile;
         on-double-click = "asusctl profile -n";
 
         tooltip = false;
@@ -201,48 +199,45 @@
         format = "{}";
         return-type = "json";
 
-        exec = ''
-          ${pkgs.bash}/bin/bash ${
-            pkgs.writers.writeBash "supergfxctlStateScript" ''
-              state=$(supergfxctl -g)
+        exec = let
+          dispatchGPU = pkgs.writeShellScriptBin "dispatchGPU" ''
+            state=$(supergfxctl -g)
 
-              case $state in
-                *Integrated*)
-                  echo "{\"text\":\"🔴\"}"
-                  ;;
-                *Hybrid*)
-                  echo "{\"text\":\"🟢\"}"
-                  ;;
-                *)
-                  echo 'zalupa'
+            case $state in
+              *Integrated*)
+                echo "{\"text\":\"🔴\"}"
                 ;;
-              esac
-
-              exit 0
-            ''
-          }
-        '';
-        on-double-click = ''
-          ${pkgs.bash}/bin/bash ${
-            pkgs.writers.writeBash "supergfxctlChangeScript" ''
-              state=$(supergfxctl -g)
-
-              case $state in
-                *Integrated*)
-                  supergfxctl -m Hybrid
-                  ;;
-                *Hybrid*)
-                  supergfxctl -m Integrated
-                  ;;
-                *)
-                  echo 'zalupa'
+              *Hybrid*)
+                echo "{\"text\":\"🟢\"}"
                 ;;
-              esac
+              *)
+                echo 'zalupa'
+              ;;
+            esac
 
-              exit 0
-            ''
-          }
-        '';
+            exit 0
+          '';
+        in lib.getExe dispatchGPU;
+
+        on-double-click = let
+          dispatchCurve = pkgs.writeShellScriptBin "dispatchCurve" ''
+            state=$(supergfxctl -g)
+
+            case $state in
+              *Integrated*)
+                supergfxctl -m Hybrid
+                ;;
+              *Hybrid*)
+                supergfxctl -m Integrated
+                ;;
+              *)
+                echo 'zalupa'
+              ;;
+            esac
+
+            exit 0
+          '';
+        in lib.getExe dispatchCurve;
 
         tooltip = false;
         interval = refreshInterval;

@@ -4,14 +4,9 @@
     unzip
     unrar
 
-    simple-mtpfs
     usbutils
-
     dust
-    duf
 
-    fastfetch
-    onefetch
     (nvtopPackages.amd.override { nvidia = true; })
   ];
 }
