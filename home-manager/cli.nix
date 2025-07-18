@@ -23,6 +23,9 @@
 
     bat = { enable = true; };
 
-    btop = { enable = true; };
+    btop = {
+      enable = true;
+      settings = { update_ms = 1000; };
+    };
   };
 }

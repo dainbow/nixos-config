@@ -57,7 +57,11 @@
 
   time.timeZone = "Europe/Moscow";
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    cudaSupport = true;
+    rocmSupport = true;
+  };
 
   # Do not touch
   system.stateVersion = "24.11";

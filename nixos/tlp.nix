@@ -2,11 +2,14 @@
   services.tlp = {
     enable = true;
     settings = {
-      CPU_DRIVER_OPMODE_ON_BAT = "passive";
+      CPU_DRIVER_OPMODE_ON_BAT = "active";
       CPU_DRIVER_OPMODE_ON_AC = "active";
 
-      CPU_SCALING_GOVERNOR_ON_BAT = "conservative";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
+
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
 
       CPU_BOOST_ON_BAT = 0;
       CPU_BOOST_ON_AC = 1;
@@ -23,6 +26,8 @@
       USB_EXCLUDE_BTUSB = 1;
 
       RUNTIME_PM_ON_AC = "auto";
+
+      STOP_CHARGE_THRESH_BAT0 = "70";
     };
   };
 }

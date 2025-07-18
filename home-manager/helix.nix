@@ -5,6 +5,8 @@
     enable = true;
     defaultEditor = true;
 
+    package = pkgs.unstable.helix;
+
     languages = {
       language = [{
         name = "nix";

@@ -83,7 +83,7 @@
       };
 
       pulseaudio = {
-        format = "{icon}  {volume}%";
+        format = "{icon} {volume}%";
         format-muted = "󰸈";
         format-icons = { default = [ "" "" "" ]; };
         tooltip = false;
@@ -135,12 +135,12 @@
 
       network = {
         format = "󰤭";
-        format-wifi = "{icon}  {essid}";
+        format-wifi = "{icon} {essid}";
         format-icons = [ "󰤯" "󰤟" "󰤢" "󰤥" "󰤨" ];
-        format-disconnected = "󰤫  Disconnected";
+        format-disconnected = "󰤫 Disconnected";
 
-        format-ethernet = "󰈀  {ipaddr}/{cidr}";
-        format-linked = "󰈀  {ifname} (No IP)";
+        format-ethernet = "󰈀 {ipaddr}/{cidr}";
+        format-linked = "󰈀 {ifname} (No IP)";
 
         tooltip = false;
         interval = refreshInterval;
@@ -150,8 +150,7 @@
         format = "󰂯";
         format-disabled = "󰂲";
         format-connected = "󰂱 {device_alias}";
-        format-connected-battery =
-          "󰂱 {device_alias} : 󰥉 {device_battery_percentage}%";
+        format-connected-battery = "󰂱 {device_alias}";
 
         tooltip = false;
         interval = refreshInterval;

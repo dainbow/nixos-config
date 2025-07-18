@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
@@ -17,8 +18,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
+    yazi-simple-tag = {
+      url = "github:boydaihungst/simple-tag.yazi";
+      flake = false;
+    };
 
+    yazi-torrent-preview = {
+      url = "github:kirasok/torrent-preview.yazi";
+      flake = false;
+    };
+
+    yazi-mediainfo = {
+      url = "github:boydaihungst/mediainfo.yazi";
+      flake = false;
+    };
+
+    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     disko.url = "github:nix-community/disko";
@@ -28,7 +43,7 @@
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, chaotic
-    , betterfox, solaar, vscode-extensions, ... }@inputs:
+    , betterfox, solaar, vscode-extensions, nixpkgs-unstable, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -45,12 +60,23 @@
           disko.nixosModules.disko
           solaar.nixosModules.default
           # hyprland.nixosModules.default
-          { nixpkgs.overlays = [ vscode-extensions.overlays.default ]; }
+          {
+            nixpkgs.overlays = [
+              vscode-extensions.overlays.default
+              (final: _: {
+                unstable = import nixpkgs-unstable {
+                  inherit (final.stdenv.hostPlatform) system;
+                  inherit (final) config;
+                };
+              })
+            ];
+          }
 
           ./nixos/module.nix
 
           {
             home-manager = {
+              extraSpecialArgs = { inherit inputs; };
               useGlobalPkgs = true;
               users."${mainUser}" = {
                 imports = [
