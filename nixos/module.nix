@@ -4,6 +4,7 @@
     ./cli.nix
     ./disk-config.nix
     ./fonts_themes.nix
+    # ./xray.nix
     # ./gdm.nix
     # ./gnome.nix
     ./hardware-configuration.nix
@@ -23,6 +24,7 @@
     # ./ccache.nix
     # ./virtualisation.nix
     ./tlp.nix
+    # ./ssh.nix
   ];
 
   nix = {

@@ -4,6 +4,7 @@
       loupe
       transmission_4-gtk
       tor-browser
+      davinci-resolve
       # hiddify-app
       # kdePackages.kdenlive
 

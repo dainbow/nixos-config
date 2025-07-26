@@ -1,18 +1,20 @@
-{ pkgs, lib, ... }: {
-  home.packages = with pkgs; [ nixd ];
+{ pkgs, lib, ... }:
+let upkgs = pkgs.unstable;
+in {
+  home.packages = with upkgs; [ nixd ];
   # Helix editor default choose
   programs.helix = {
     enable = true;
     defaultEditor = true;
 
-    package = pkgs.unstable.helix;
+    package = upkgs.helix;
 
     languages = {
       language = [{
         name = "nix";
         auto-format = true;
 
-        formatter = { command = lib.getExe pkgs.nixfmt-classic; };
+        formatter = { command = lib.getExe upkgs.nixfmt-classic; };
       }];
     };
   };

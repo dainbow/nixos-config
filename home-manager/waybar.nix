@@ -48,6 +48,7 @@
       "hyprland/language" = {
         format-en = "🇺🇸 ENG (US)";
         format-ru = "🇷🇺 RUS";
+        keyboard-name = "asus-keyboard-2";
       };
 
       "clock#time" = {

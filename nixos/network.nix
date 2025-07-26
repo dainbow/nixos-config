@@ -11,5 +11,4 @@
     firewall.enable = false;
     resolvconf.dnsExtensionMechanism = false;
   };
-
 }
