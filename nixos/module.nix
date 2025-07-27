@@ -24,7 +24,7 @@
     # ./ccache.nix
     # ./virtualisation.nix
     ./tlp.nix
-    # ./ssh.nix
+    ./ssh.nix
   ];
 
   nix = {

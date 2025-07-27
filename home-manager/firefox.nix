@@ -10,6 +10,11 @@
       id = 0;
       name = "Pavel";
 
+      search = {
+        default = "ddg";
+        force = true;
+      };
+
       betterfox = {
         enable = true;
         enableAllSections = true;

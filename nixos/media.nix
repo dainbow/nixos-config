@@ -5,6 +5,8 @@
       transmission_4-gtk
       tor-browser
       davinci-resolve
+      handbrake
+      yt-dlp
       # hiddify-app
       # kdePackages.kdenlive
 

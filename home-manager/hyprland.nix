@@ -13,8 +13,6 @@
     playerctl
 
     xorg.xhost
-
-    qt5.qtwayland
   ];
 
   wayland.windowManager.hyprland = {

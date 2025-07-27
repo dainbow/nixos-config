@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, pkgs, ... }: {
   services.tlp = {
     enable = true;
     settings = {
@@ -30,4 +30,22 @@
       STOP_CHARGE_THRESH_BAT0 = "70";
     };
   };
+  services.udev.extraRules = let
+    supergfxBin = lib.getExe' pkgs.supergfxctl "supergfxctl";
+    toMode = mode:
+      pkgs.writeShellScriptBin "to${mode}" ''
+        if [[ $(${supergfxBin} -g) != ${mode} ]]; then
+          ${supergfxBin} -m ${mode}
+          ${lib.getExe' pkgs.systemd "systemctl"} restart greetd.service
+        fi
+      '';
+  in ''
+    SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="${
+      lib.getExe (toMode "Hybrid")
+    }"
+    SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="${
+      lib.getExe (toMode "Integrated")
+    }"
+  '';
 }
+

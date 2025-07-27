@@ -235,6 +235,7 @@
               ;;
             esac
 
+            ${lib.getExe' pkgs.systemd "systemctl"} restart greetd.service
             exit 0
           '';
         in lib.getExe dispatchCurve;
