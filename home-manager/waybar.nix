@@ -13,6 +13,8 @@
 
       modules-left = [ "hyprland/workspaces" ];
       modules-center = [
+        "hyprland/window"
+        "custom/separator"
         "custom/weather"
         "custom/separator"
         "clock#time"
@@ -36,6 +38,12 @@
         "disk"
         "tray"
       ];
+
+      "hyprland/window" = {
+        format = "";
+        icon = true;
+        separate-outputs = true;
+      };
 
       "hyprland/workspaces" = {
         format = "{icon}";

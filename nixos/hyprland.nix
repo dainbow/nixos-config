@@ -18,13 +18,14 @@
   services.greetd = {
     enable = true;
 
-    settings = rec {
-      initial_session = {
-        command = "${lib.getExe config.programs.hyprland.package}";
-        user = mainUser;
+    settings = {
+      default_session = {
+        command = "${lib.getExe pkgs.greetd.tuigreet} -t -r -c ${
+            lib.getExe config.programs.hyprland.package
+          }";
       };
-
-      default_session = initial_session;
     };
   };
+
+  security.polkit.enable = true;
 }

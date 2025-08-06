@@ -1,4 +1,6 @@
-{ ... }: {
+{ pkgs, ... }: {
+  home.packages = with pkgs; [ vim ];
+
   programs = {
     eza = {
       enable = true;
