@@ -1,7 +1,14 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ vim ];
-
+{ ... }: {
   programs = {
+    translate-shell = {
+      enable = true;
+      settings = {
+        hl = "en";
+        tl = "ru";
+        verbose = true;
+      };
+    };
+
     eza = {
       enable = true;
       enableZshIntegration = true;

@@ -7,7 +7,7 @@
       # davinci-resolve
       # handbrake
       # yt-dlp
-      # hiddify-app
+      hiddify-app
       # kdePackages.kdenlive
 
       # (let

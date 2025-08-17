@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   imports = [
+    # ./virtualisation.nix
     ./yubikey.nix
     # ./jenkins.nix
     ./bootloader.nix

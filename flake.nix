@@ -13,11 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    solaar = {
-      url = "github:Svenum/Solaar-Flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     yazi-simple-tag = {
       url = "github:boydaihungst/simple-tag.yazi";
       flake = false;
@@ -33,9 +28,6 @@
       flake = false;
     };
 
-    vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-25.05";
@@ -43,7 +35,7 @@
   };
 
   outputs = { nixpkgs, home-manager, nixos-hardware, disko, nur, stylix, chaotic
-    , betterfox, solaar, vscode-extensions, nixpkgs-unstable, ... }@inputs:
+    , betterfox, nixpkgs-unstable, ... }@inputs:
     let
       mainUser = "dainbow";
       hostname = "dainix";
@@ -58,11 +50,9 @@
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.modules.nixos.default
           disko.nixosModules.disko
-          solaar.nixosModules.default
           # hyprland.nixosModules.default
           {
             nixpkgs.overlays = [
-              vscode-extensions.overlays.default
               (final: _: {
                 unstable = import nixpkgs-unstable {
                   inherit (final.stdenv.hostPlatform) system;
