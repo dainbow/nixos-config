@@ -18,16 +18,6 @@
       flake = false;
     };
 
-    yazi-torrent-preview = {
-      url = "github:kirasok/torrent-preview.yazi";
-      flake = false;
-    };
-
-    yazi-mediainfo = {
-      url = "github:boydaihungst/mediainfo.yazi";
-      flake = false;
-    };
-
     disko.url = "github:nix-community/disko";
     nur.url = "github:nix-community/NUR";
     stylix.url = "github:danth/stylix/release-25.05";
@@ -41,7 +31,7 @@
       hostname = "dainix";
     in {
       nixosConfigurations."${hostname}" = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs mainUser hostname; };
+        specialArgs = { inherit inputs mainUser hostname nixpkgs-unstable; };
 
         modules = [
           chaotic.nixosModules.default
@@ -50,29 +40,16 @@
           nixos-hardware.nixosModules.asus-zephyrus-ga401
           nur.modules.nixos.default
           disko.nixosModules.disko
-          # hyprland.nixosModules.default
-          {
-            nixpkgs.overlays = [
-              (final: _: {
-                unstable = import nixpkgs-unstable {
-                  inherit (final.stdenv.hostPlatform) system;
-                  inherit (final) config;
-                };
-              })
-            ];
-          }
 
           ./nixos/module.nix
 
           {
             home-manager = {
-              extraSpecialArgs = { inherit inputs; };
+              extraSpecialArgs = { inherit inputs mainUser; };
               useGlobalPkgs = true;
               users."${mainUser}" = {
-                imports = [
-                  betterfox.homeManagerModules.betterfox
-                  ./home-manager/home.nix
-                ];
+                imports =
+                  [ betterfox.homeModules.betterfox ./home-manager/home.nix ];
               };
             };
           }

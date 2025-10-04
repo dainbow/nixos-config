@@ -3,6 +3,7 @@
     [
       loupe
       transmission_4-gtk
+      transmission-remote-gtk
       tor-browser
       # davinci-resolve
       # handbrake

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ mainUser, lib, pkgs, ... }: {
   services.tlp = {
     enable = true;
     settings = {
@@ -36,7 +36,7 @@
       pkgs.writeShellScriptBin "to${mode}" ''
         if [[ $(${supergfxBin} -g) != ${mode} ]]; then
           ${supergfxBin} -m ${mode}
-          ${lib.getExe' pkgs.systemd "systemctl"} restart greetd.service
+          ${lib.getExe' pkgs.systemd "loginctl"} terminate-user ${mainUser}
         fi
       '';
   in ''

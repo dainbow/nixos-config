@@ -2,15 +2,9 @@
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
-    package = pkgs.unstable.yazi.override {
-      extraPackages = with pkgs.unstable; [ mediainfo ];
-    };
+    package = pkgs.unstable.yazi;
 
-    plugins = {
-      simple-tag = "${inputs.yazi-simple-tag}/";
-      torrent-preview = "${inputs.yazi-torrent-preview}/";
-      mediainfo = "${inputs.yazi-mediainfo}/";
-    };
+    plugins = { simple-tag = "${inputs.yazi-simple-tag}/"; };
 
     initLua = # lua
       ''
@@ -38,42 +32,6 @@
             id = "simple-tag";
             name = "*/";
             run = "simple-tag";
-          }
-        ];
-
-        prepend_preloaders = [
-          {
-            mime = "{audio,video,image}/*";
-            run = "mediainfo";
-          }
-
-          {
-            mime = "application/subrip";
-            run = "mediainfo";
-          }
-
-          {
-            mime = "application/postscript";
-            run = "mediainfo";
-          }
-
-        ];
-        prepend_previewers = [
-          {
-            mime = "{audio,video,image}/*";
-            run = "mediainfo";
-          }
-          {
-            mime = "application/subrip";
-            run = "mediainfo";
-          }
-          {
-            mime = "application/postscript";
-            run = "mediainfo";
-          }
-          {
-            mime = "application/bittorrent";
-            run = "torrent-preview";
           }
         ];
       };

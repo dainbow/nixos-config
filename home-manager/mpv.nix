@@ -2,14 +2,7 @@
   programs.mpv = {
     enable = true;
 
-    scripts = with pkgs.mpvScripts; [
-      mpris
-      uosc
-      thumbfast
-      sponsorblock
-      youtube-upnext
-      quality-menu
-    ];
+    scripts = with pkgs.mpvScripts; [ mpris uosc thumbfast ];
 
     bindings = {
       space = "cycle pause; script-binding uosc/flash-pause-indicator #! Pause";
@@ -36,7 +29,6 @@
       osd-bar = "no";
       cache = "auto";
       video-sync = "display-resample";
-      ytdl-format = "bestvideo[height<=?1080]+bestaudio/best";
       profile = "fast";
     };
   };

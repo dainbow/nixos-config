@@ -3,7 +3,10 @@
 
   programs.firefox = {
     enable = true;
-    betterfox.enable = true;
+    betterfox = {
+      enable = true;
+      profiles.default = { enableAllSections = true; };
+    };
     package = pkgs.unstable.firefox;
 
     profiles.default = {
@@ -13,11 +16,6 @@
       search = {
         default = "ddg";
         force = true;
-      };
-
-      betterfox = {
-        enable = true;
-        enableAllSections = true;
       };
 
       bookmarks = {
@@ -52,6 +50,10 @@
             {
               name = "ChatGPT";
               url = "https://chatgpt.com/";
+            }
+            {
+              name = "Y.Translate";
+              url = "https://translate.yandex.com/";
             }
           ];
         }];
@@ -111,6 +113,7 @@
             ads = "block_all";
             hide_banner_ads = true;
             remove_member_only = true;
+            player_force_speed_on_music = false;
           };
         };
       };

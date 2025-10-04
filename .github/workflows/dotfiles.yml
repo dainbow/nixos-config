@@ -1,0 +1,37 @@
+name: Build and Release Nix Package
+
+on:
+  push:
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build Nix package
+        run: |
+          nix build .#nixosConfigurations.dainix.pkgs.dotfiles
+
+      - name: Prepare artifact
+        run: |
+          mkdir -p artifacts
+          cp -rL result artifacts/
+          tar -czf myPackage-${GITHUB_REF_NAME}.tar.gz -C artifacts result
+          echo "artifact=myPackage-${GITHUB_REF_NAME}.tar.gz" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.artifact }}
+          name: Dotfiles ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

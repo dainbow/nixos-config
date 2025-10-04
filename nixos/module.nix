@@ -1,33 +1,24 @@
 { pkgs, ... }: {
   imports = [
-    # ./virtualisation.nix
+    ./overlays.nix
     ./yubikey.nix
-    # ./jenkins.nix
     ./bootloader.nix
     ./cli.nix
     ./disk-config.nix
     ./fonts_themes.nix
-    # ./xray.nix
-    # ./gdm.nix
-    # ./gnome.nix
     ./hardware-configuration.nix
-    # ./flatpak.nix
     ./kernel.nix
     ./media.nix
     ./sound.nix
     ./network.nix
     ./terminal.nix
     ./user.nix
-    # ./fingerprint.nix
     ./nvidia.nix
     ./stylix.nix
-    # ./steam.nix
     ./hyprland.nix
     ./bluetooth.nix
-    # ./ccache.nix
-    # ./virtualisation.nix
     ./tlp.nix
-    ./ssh.nix
+    ./mounts.nix
   ];
 
   nix = {

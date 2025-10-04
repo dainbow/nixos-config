@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ mainUser, lib, pkgs, ... }: {
   programs.waybar = {
     enable = true;
 
@@ -243,7 +243,7 @@
               ;;
             esac
 
-            ${lib.getExe' pkgs.systemd "systemctl"} restart greetd.service
+            ${lib.getExe' pkgs.systemd "loginctl"} terminate-user ${mainUser}
             exit 0
           '';
         in lib.getExe dispatchCurve;

@@ -1,5 +1,6 @@
-{ ... }: {
+{ pkgs, ... }: {
   imports = [
+    ./nix-index.nix
     ./terminal.nix
     ./tldr.nix
     # ./dconf.nix
