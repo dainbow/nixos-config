@@ -25,15 +25,11 @@ jobs:
         run: |
           mkdir -p artifacts
           cp -rL result artifacts/
-          tar -czf dotfiles-${GITHUB_REF_NAME}.tar.gz -C artifacts result
-          echo "artifact=dotfiles-${GITHUB_REF_NAME}.tar.gz" >> $GITHUB_ENV
+          tar -czf dotfiles.tar.gz -C artifacts result
 
-      - name: Create GitHub Release
+      - name: Release
         uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
-          files: ${{ env.artifact }}
+          files: dotfiles.tar.gz
           name: Dotfiles ${{ github.ref_name }}
-          tag_name: ${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
