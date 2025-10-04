@@ -2,7 +2,9 @@ name: Build and Release Nix Package
 
 on:
   push:
-
+    tags:
+      - "v*"
+      
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -23,8 +25,8 @@ jobs:
         run: |
           mkdir -p artifacts
           cp -rL result artifacts/
-          tar -czf myPackage-${GITHUB_REF_NAME}.tar.gz -C artifacts result
-          echo "artifact=myPackage-${GITHUB_REF_NAME}.tar.gz" >> $GITHUB_ENV
+          tar -czf dotfiles-${GITHUB_REF_NAME}.tar.gz -C artifacts result
+          echo "artifact=dotfiles-${GITHUB_REF_NAME}.tar.gz" >> $GITHUB_ENV
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
