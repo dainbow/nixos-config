@@ -2,33 +2,41 @@ name: Build and upload Dotfiles
 
 on:
   push:
-    tags:
-      - "v*"
       
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
+    permissions:
+        contents: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - uses: cachix/install-nix-action@v31
+      - name: Install Nix
+        uses: cachix/install-nix-action@v31
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build Nix package
+      - name: Build dotfiles from Nix
         run: |
           nix build .#nixosConfigurations.dainix.pkgs.dotfiles
 
-      - name: Prepare artifact
+      - name: Pack dotfiles into archive
         run: |
           mkdir -p artifacts
           cp -rL result artifacts/
           tar -czf dotfiles.tar.gz -C artifacts result
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+      - name: Create Release
+        uses: ncipollo/release-action@v1
         with:
-          name: dotfiles
-          path: dotfiles.tar.gz 
+          tag_name: "auto-release-${{ github.sha }}"
+          release_name: "Automatic Release for ${{ github.sha }}"
+          body: |
+            This release was automatically created on a push to the ${{ github.ref }} branch.
+            Commit: ${{ github.sha }}
+          draft: false
+          prerelease: false
+          artifacts: "dotfiles.tar.gz"
+          token: ${{ secrets.GITHUB_TOKEN }}
