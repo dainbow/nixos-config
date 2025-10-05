@@ -2,6 +2,8 @@ name: Build and upload Dotfiles
 
 on:
   push:
+    tags:
+      - "v*"
       
 jobs:
   build-and-release:
