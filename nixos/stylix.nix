@@ -1,9 +1,8 @@
 { pkgs, ... }: {
   stylix = {
     enable = true;
-    polarity = "dark";
-    base16Scheme =
-      "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+    polarity = "light";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
     image = ./wallpaper.jpg;
 
     cursor = {
